@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<style> 
+	#result1{
+		background : yellow;
+	}
+</style>
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('#btn1').click(function(){
+			$('#result1').empty();
+		})
+		
+		$('#btn2').click(function(){
+			$('#result1').remove();
+		})
+		
+		$('.pp').click(function(){
+			$(this).css('font-size', '+=5px');
+		})
+		$('#btn3').click(function(){
+			a = $('#p1').remove();
+			
+			$('.box').append(a);
+		})
+		$('#btn4').click(function(){
+			a = $('#p2').detach();
+			
+			$(a).appendTo('.box');
+			
+		})
+		
+		$('#btn5').click(function(){
+			a = $('#p4').clone(true);
+			
+			$(a).appendTo('#result4')
+		})
+		
+		$('#btn6').click(function(){
+			a = $('#p3').clone();
+			
+			$('#result4').append(a);
+		})
+		
+	})
+	
+</script>	
+</head>
+<body>
+	<div class = "box">
+		<h2> empty와 remove</h2>
+		- empty() : 대상 셀렉터의 자식을 지운다, 대상 셀렉터를 비운다. <br>
+		- remove() : 대상 셀렉터를 지운다. <br>
+		
+		<div id = "result1">
+			<p>무궁화 꽃이 피었습니다. </p>
+			<p>장미 꽃도 피었습니다.</p>
+		</div>
+		
+		<br>
+		<button id = "btn1" type = "button">empty(비우기)</button>
+		<button id = "btn2" type = "button">empty(지우기)</button>
+		
+	</div>
+	
+	<div class = "box">
+		<h2> detach와 remove</h2>
+		- detach() : 대상 셀렉터를 지운다., 이벤트 핸들러는 지우지 않는다. <br>
+		- remove() : 대상 셀렉터를 지운다. 이벤트 핸들로도 지워진다. <br>
+		<br>
+		-p태그의 문자열을 클릭하면 글자 크기를 증가시킨다. <br>
+		
+		<div id = "result2">
+			<p id = "p1" class = "pp">무궁화 꽃이 피었습니다. </p>
+			<p id = "p2" class = "pp">장미 꽃도 피었습니다.</p>
+		</div>
+		
+		<br>
+		<button id = "btn3" type = "button">detach(이벤트는 안 지우기)</button>
+		<button id = "btn4" type = "button">remove(이벤트도 지우기)</button>
+		
+	</div>
+	
+	<div class = "box">
+		<h2> clone</h2>
+		- clone() : 대상 셀렉터를 복사한다., 이벤트 핸들러는 복사되지 않는다.  <br>
+		- clone(true) :대상 셀렉터를 복사한다., 이벤트 핸들러도 복사된다. <br>
+		<br>
+		-p태그의 문자열을 클릭하면 글자 크기를 증가시킨다. <br>
+		
+		<div id = "result3">
+			<p id = "p3" class = "pp">무궁화 꽃이 피었습니다. </p>
+			<p id = "p4" class = "pp">장미 꽃도 피었습니다.</p>
+		</div> 
+		
+		<br>
+		<button id = "btn5" type = "button">clone - true(이벤트는 안 지우기)</button>
+		<button id = "btn6" type = "button">clone(이벤트도 지우기)</button>
+		<div id = 'result4'></div>
+	</div>
+	
+</body>
+</html>

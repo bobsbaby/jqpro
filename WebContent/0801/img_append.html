@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<style>
+	img{
+		width : 100px;
+		height: 100px;
+	}
+</style>
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('#btn1').click(function(){
+			//window 생략 가능 
+			a = window.setInterval(function(){
+				$('img:first').appendTo('#result1');
+			}, 800);
+			$(this).prop('disabled', true);
+			$(this).css('background', 'white');
+		})
+		$('#btn2').click(function(){
+			//serinterval에서 변수를 받아서 clearinterval에 넣어준다.
+			clearInterval(a);
+			$('#btn1').prop('disabled',false);
+			$('#btn1').css('background', 'blue');
+			
+			
+		})
+		
+		$('#result2 p').click(function(){
+			//클릭한 p태그의 문자열 가져오기 
+			vtext = $(this).text();
+			
+			//새로운 이미지 만들기
+			vimg = $('<img>', {
+								'src' : '../images/'+vtext+'.jpg',
+								'width' : '100px',
+								'height' : '100px'
+			})
+			
+			//클릭한 p태그의 안쪽으로 추가 
+			$(this).append(vimg);
+// 			$(vimg).appendTo(this);
+			
+		})
+		
+		
+		
+	})
+	
+</script>	
+</head>
+<body>
+
+	<div class = "box">
+		<div id = "result1">
+			<img src = "../images/image.1.jpg">
+			<img src = "../images/image.2.jpg">
+			<img src = "../images/image.3.jpg">
+			<img src = "../images/image.4.jpg">
+			<img src = "../images/image.5.jpg">
+			<img src = "../images/image.6.jpg">
+			<img src = "../images/jangman.jpg">
+			<img src = "../images/jangman2.jpg">
+			<img src = "../images/jangman3.jpg">
+		</div><br>
+		<button id = "btn1" type = "button">시작</button>
+		<button id = "btn2" type = "button">종료</button>
+	</div>
+	
+	<div class = "box">
+		<h3>p태그의 문자열을 클릭</h3>
+		  -문자열로 구성된 이미지를 추가한다. 
+		  - remove : div 전체를 삭제 
+		  - empty : div에 작성한 내용만 삭제 
+		  - detach : remove와 같지만 
+		    
+		<div id = "result2">
+			<p title = "aaa">대나무숲</p>
+			<p title = "aaa">셔틀콕</p>
+			<p title = "aaa">에스프레소</p>
+			<p title = "aaa">카페라떼</p>
+			<p title = "aaa">지도</p>
+		</div><br>
+		<button id = "btn3" type = "button">시작</button>
+		<button id = "btn4" type = "button">종료</button>
+	</div>
+
+</body>
+</html>

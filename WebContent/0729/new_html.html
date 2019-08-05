@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 외부 스타일 연결  -->
+<link rel = "stylesheet" href ="../css/mystyle.css">
+<script src = "../js/jquery-3.4.1.min.js"> </script>
+<script>
+	$(function(){
+		$('#but1').on('click', function() {
+			//새로운 html생성
+			
+			vptag = $('<p>무궁화 꽃이 피었습니다.</p>');
+ 			$('#result1').append(vptag);
+// 			$('#result1').css('font-size', '1.5em').css('font-weight', 'bold');
+// 			중괄호 안에 내용을 넣을때는 속성 : 값 , 형태로 넣으면 css를 한번에 여러개 적용할 수 있다. 
+			$('#result1').css({'font-size' : '2.0em', 'font-weight' : 'bold', 'color' : 'red'});
+		})
+		
+	$('#but2').on('click', function(){
+		//이미지를 여러개 나타내기 위해서 배열로 이미지 담기
+		imgarr = ["../images/카푸치노.jpg","../images/아메리카노.jpg", "../images/카푸치노.jpg", "../images/홍길동.jpg", "../images/홍길동2.jpg", "../images/핫초코.jpg",
+			"../images/홍길동3.jpg", "../images/americano.jpg", "../images/cafelatte.jpg", "../images/cappuccino.jpg", "../images/coffee.gif", "../images/hubble.jpg"];
+		
+		//랜덤 발생 
+		rand = Math.floor(Math.random() * imgarr.length);
+		
+		//img 태그를 생성 
+		imgtag = $('<img>',{ 
+							'src' : imgarr[rand],
+							'width' : '150px',
+							'height' : '100px',
+							'title' : function() {
+								//src 속성값을 가져온다 -> getAttribute는 자바 명령어 이므로 this를 jquery 로 접근하면 안 된다.
+								//getsrc = this.getAttribute('src');
+								getsrc = $(this).attr('src')
+								//lastIndexOf("/") -> / 이후의 글자  
+								start = getsrc.lastIndexOf("/");
+								end = getsrc.lastIndexOf(".");
+								
+								//vtitle 변수로 이미지 파일 이름을 담는다. 
+								vtitle = getsrc.substring(start+1, end);
+								
+								return vtitle;
+							},
+							'click' : function() {
+								$(this).css('border', '2px solid blue');
+							}
+							})
+		$('#result2').append(imgtag);
+		//append ->새로운 내용을 뒤에 위치시킨다. appendto -> 새로운 내용을 앞에 위치시킨다.  -> 위치 차이인듯 
+		$(imgtag).appendTo('#result2');
+		})	
+		
+		
+		$('#but3').on('click',function() {
+// 			vdiv = $('div',{});
+// 			$('#result3').append(vdiv);
+			
+			$('<div></div>',{
+				'text' : '클릭하세요',
+				'click' : function() {
+					$(this).css('border', '5px solid green');
+				}
+			}).appendTo('#result3');
+		})
+		
+		
+		
+	})
+</script>
+
+</head>
+<body>
+	<div class = "box">
+		<h2>$('html')</h2>
+		-새로운 html요소를 생성 <br>
+		-div result1 안에 추가<br>
+		-border-radius : 모서리 둥글게 만들어 준당~~~<br>
+		<br><br>
+		<button id = 'but1' type = "button"> 실행 </button>
+		<div id = "result1"></div>
+	</div>
+	
+	<div class = "box">
+		<h2>$('html', {properties})</h2>
+		-img 요소를 생성 <br>
+		- 속성 : src, width, height,클릭 함수
+		-div result2 안에 추가<br>
+		-border-radius : 모서리 둥글게 만들어 준당~~~<br>
+		<br><br>
+		<button id = 'but2' type = "button"> 실행 </button>
+		<div id = "result2"></div>
+	</div>
+	
+		<div class = "box">
+		<h2>$('html', {properties})</h2>
+		-div 요소를 생성 <br>
+		- 속성 :width, height,클릭 함수
+		- innerHTML -> html태그가 포함되어 있음
+		- textContent -> html태그가 포함되어 있지 않음 
+		-div result3 안에 추가<br>
+		-border-radius : 모서리 둥글게 만들어 준당~~~<br>
+		<br><br>
+		<button id = 'but3' type = "button"> 실행 </button>
+		<div id = "result3"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		
+		$('input[type=button]').click(function(){
+			
+			res = "";
+			$(':checkbox:checked').each(function(i, a){				//i -> index a -> i를 담는 변수 (옵션)
+																	//a = :checkebox.checked[i]
+				//res += $('input[type=checkbox]:checked').val() 	//속성 선택자
+				//res += $(a).val() + " ";							//폼 양식 선택자 
+				res += $(this).val() + " "; 						//this 현재 실행되고 있는 
+			})
+			//document.getElementById('result1').innerHtml = res;
+			$('#result1').html(res);
+		})
+		
+		$('#spring').change(function(){
+			// :selected를 이용
+			res ="";
+			$('select[name=spring] option:selected').each(function(){
+// 			$('#spring option:selected')
+				res += $(this).val() + "<br>" ;
+			})
+			$('#result2').html(res);
+		})
+	})
+	
+</script>	
+</head>
+<body>
+
+<div class = "box">
+	<h3> :checked</h3>
+		- $('input[type=checkbox]:checked') <br>
+		- $(':checkbox:checked')	<br>
+		- 선택한 요소를 대상으로 반복문을 실행한다. <br>
+		- 반복문 안에서 현재 실행 대상이 되는 객체를 this로 받는다. <br>
+		
+		- val -> getter, setter역할을 하며 form 하위 객체에서만 사용 가능 <br>
+		- attr -> 속성명과 값으로 설정되어 있음, prop -> true, false  : 속성에서 값을 가져 올때 사용 
+	<form>
+		취 미 :
+		 <input type="checkbox" name="hobby" value="여행" checked >여행
+		 <input type="checkbox" name="hobby" value="장기">장기
+		<input type="checkbox" name="hobby" value="바둑">바둑
+		<input type="checkbox" name="hobby" value="독서" >독서
+		<input type="checkbox" name="hobby" value="낚시">낚시<br><br>
+		<input type="button" value="전송">
+	</form>
+	<div id = "result1"></div>
+</div>
+
+<div class = "box">
+	<h3> :selected</h3>
+		- select/option 에서 선택한 요소를 선택한다.  <br>
+		- select에서 change이벤트를 수행	<br>
+		- 선택한 요소를 대상으로 반복문을 실행한다. <br>
+		- 반복문 안에서 현재 실행 대상이 되는 객체를 this로 받는다. <br>
+		
+		- val -> getter, setter역할을 하며 form 하위 객체에서만 사용 가능 <br>
+		- attr -> 속성명과 값으로 설정되어 있음, prop -> true, false  : 속성에서 값을 가져 올때 사용 
+	
+	<form>
+		봄소식 : 
+		<select name="spring" id="spring" multiple size="3"> 
+		<!-- name, id -> attr multiple size -> prop -->
+		<!-- multiple size는 한번에 선택 가능한 갯수 -->
+		<!-- size : option이 보여질 갯수  -->
+			<option  >개나리</option>
+			<option selected>진달래</option>
+			<option>민들레</option>
+			<option selected>벚꽃</option>
+			<option>목련</option>
+			<option>철쭉</option>
+		</select>
+	</form>
+	<div id = "result2"></div>
+</div>
+
+
+
+</body>
+</html>

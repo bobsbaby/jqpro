@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+
+<style>
+	img{
+		width : 100px;
+		height : 100px;
+	}
+	
+</style>
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+// 		alert($('img').attr('src'));
+		$('img').attr('title', function(){
+			//src값을 가져온다. 
+			vsrc = $(this).attr('src');
+			start = vsrc.lastindexOf('/');
+			end = vsrc.lastindexOf('.');
+			
+			vtitle = vsrc.substring(start+1, end);
+			return vtitle;
+		});
+	})
+	
+</script>	
+</head>
+<body>
+	
+	<img src = "../images/jang1.jpg">
+	<img src = "../images/jang2.jpg">
+	<img src = "../images/jang3.jpg">
+	<img src = "../images/jang4.jpg">
+	<img src = "../images/jang5.jpg">
+</body>
+</html>

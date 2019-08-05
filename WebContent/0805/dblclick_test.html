@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<style>
+	img {
+		width : 200px;
+		height : 200px;
+	}
+	
+	button{
+		display : none;
+	}
+</style>
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+// 		$('img').bind('dblclick',function(){})
+		$('img').dblclick(function() {
+			$(this).hide();
+			//보여지는 이미지
+			if($('img:visible').length == 0){
+				$('button').show();
+			}
+		})
+		
+		$('button').click(function(){
+			$(this).hide();
+			$('img').show();
+		})
+		
+		$('img').hover(function() {
+			//src의 값을 미리 저장한다. 
+			now = $(this).attr('src');
+			//src 2의 속성값을 가져온다
+			change = $(this).attr('src2');
+			//sec의 속성값으로 설정한다. 
+			$(this).attr('src',change);
+		}, function() {
+			$(this).attr('src',now);
+		})
+		
+	})
+	
+</script>	
+</head>
+<body>
+	<img src = "../images/jang1.jpg" src2 = "../images/jang7.png">
+	<img src = "../images/jang2.jpg" src2 = "../images/jang6.jpg">
+	<img src = "../images/jang3.jpg" src2 = "../images/jang5.jpg">
+	<img src = "../images/jang4.jpg" src2 = "../images/jang3.jpg">
+	<img src = "../images/jang5.jpg" src2 = "../images/jang4.jpg">
+	<img src = "../images/jang6.jpg" src2 = "../images/jang2.jpg">
+	<img src = "../images/jang7.png" src2 = "../images/jang1.jpg">
+	
+	<br>
+	<button type ="button">보이기</button>
+</body>
+</html>

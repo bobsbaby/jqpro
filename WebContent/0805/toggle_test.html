@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<style>
+	div {
+		display : none;
+	}
+	.hh:hover{
+		background : pink;
+	}
+</style>
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('a').bind('click', function(){
+			event.preventDefault();
+			
+			$('div').toggle();
+		})
+		
+// 		$('h1.hh').mouseover(function() {		})
+// 		$('h1.hh').bind('mouseout', function(){ })
+		/*
+		$('h1.hh').bind('mouseover',function(){
+			$(this).css('background', 'lime');
+		})
+		
+		$('h1.hh').bind('mouseout',function(){
+			$(this).css('background', 'white');
+		})
+		*/
+		/*
+		$('h1.hh').hover(function(){
+			$(this).css('background', 'lime');
+		}, function(){
+			$(this).css('background', 'white');
+		})
+		*/
+	})
+	
+</script>	
+</head>
+<body>
+
+<pre>
+	toggle -> show/hide 가번갈아가면서 실행된다.
+	toggle() -> show/hide가 번갈아 가면서 수행
+	자세히 보기를 클릭하면 toggle()메소드가 실행된다. 
+	
+	hober(fun1, fun2) -> fun1 : mouse over / fun2 : mouse out
+</pre>
+<h1> 이순신</h1>
+<h2>조선시대의 해군</h2>
+<a href = "#">자세히보기</a>
+<!-- 넘어갈 페이지가 없을 때 # 기호를 쓴다. -->
+
+<br>
+<div>
+
+	대한민국에서 독보적으로 유명한 무신이자 성웅이란 칭호가 따로 붙을 정도로 가장 드높은 영웅이며, 
+	역사적 인물 전체로 넓혀도 세종대왕과 함께 한국에서 가장 유명한 인물이다. 
+	무신으로서도 인간으로서도 희대의 걸물이요, 파란만장한 삶을 산 사내이다. 
+	그는 임진왜란 시기 조선 수군을 이끌고 해상에서 연전연승을 거듭하며 일본군의 보급로를 차단하여 북상을 저지하였는데, 
+	전쟁 내내 적과 싸워 모든 전투에서 최소한의 희생으로 항상 승전을 거두었으며, 
+	당시 임금인 선조[7]와 조정에게 지원은 커녕 불합리한 모함과 추궁만 당하였으나 끝까지 충성을 다했고, 
+	임진왜란 최후의 대전투인 노량 해전에서 장렬한 죽음을 맞이했다.
+	
+</div>
+
+<hr>
+
+<pre>
+	hover(fn1, fn2) : mouseover와 mouseout이벤트를 실행
+</pre>
+
+<h1 class = "hh">아메이카노</h1>
+<h1 class = "hh">좋아 좋아 좋아</h1>
+<h1 class = "hh">에어컨 </h1>
+<h1 class = "hh">고장났다</h1>
+<h1 class = "hh">빨리 고쳐주라</h1>
+
+</body>
+</html>

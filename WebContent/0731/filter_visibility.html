@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('#btn1').click(function(){
+			res = "";
+			$('body :hidden').each(function(i){
+				//res += i + "번째 문자열 " +  $(this).text() + ", "
+				//res += this.tagName + "<br>";
+				
+				//tagName은 대문자로 작성해줘야 한다
+				if(this.tagName !="BR") {
+					res += i + "번째 문자열 " +  $(this).text() + "<br>"
+				}
+			})
+			$('#result1').html(res);
+		})
+		
+		$('#btn2').click(function(){
+			res = "";
+			$('.box :visible').each(function(i){
+				if(this.tagName !="BR"){
+					res += i + "번째 문자열 " + $(this).text() + ", ";
+					res += this.tagName + "<br>";
+				}
+			})
+			$('#result2').html(res);
+		})
+		
+		
+		
+	})
+	
+</script>
+</head>
+<body>
+		<pre>
+			-visibility hidden, opacity:0 -> visible(화면상에서는 보이지 않는데 보이는 것으로 간주한다.)
+			-display:none -> 보이지 않는 것으로 간주한다. 
+	
+			-body :visible로 작성하면 div(box)도 visible로 인식하여 div(box)에 있는 내용까지 전부 가지고 온다. 
+			0번째 문자열 -visibility hidden, opacity:0 -> visible(화면상에서는 보이지 않는데 보이는 것으로 간주한다.) -display:none -> 보이지 않는 것으로 간주한다. , PRE
+			1번째 문자열 hidden은 3번(display : none)만 해당하여 btn1을 선택하면 아래와 같은 결과만 나옴 0번째 문자열자리를 차지 하지 못한 문단 1번째 문자열 보이는 문단 숨겨진 문단 자리를 차지 하지 못한 문단 투명한 문단 hidden visible , DIV
+			2번째 문자열 hidden은 3번(display : none)만 해당하여 btn1을 선택하면 아래와 같은 결과만 나옴 0번째 문자열자리를 차지 하지 못한 문단 1번째 문자열 , PRE
+			3번째 문자열 보이는 문단, P
+			4번째 문자열 숨겨진 문단, P
+			5번째 문자열 투명한 문단, P
+			6번째 문자열 hidden, BUTTON
+			7번째 문자열 visible, BUTTON
+			8번째 문자열 , DIV
+			9번째 문자열 , DIV
+			- .box :visible로 작성해줘야 div 내에 있는 내용들만 가지고 온다. 
+	
+			hidden은 3번(display : none)만 해당하여 btn1을 선택하면 아래와 같은 결과만 나옴
+			0번째 문자열자리를 차지 하지 못한 문단
+			1번째 문자열
+		</pre>
+	<div class="box">
+	
+		<p>보이는 문단</p>
+		<p style="visibility: hidden;">숨겨진 문단</p>
+		<p style="display: none;">자리를 차지 하지 못한 문단</p>
+		<p style="opacity: 0;">투명한 문단</p>
+
+		<button id="btn1" type="button">hidden</button>
+		<button id="btn2" type="button">visible</button>
+		<br>
+		<div id = "result1"></div>
+		<div id = "result2"></div>
+		
+	</div>
+
+
+</body>
+</html>

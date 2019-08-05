@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- cdn방식으로 jquery 실행 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+	function proc1(t){
+//		$(this).css('font-size', '2.0em');
+ 		t.style.fontSize = "1.5em";
+		
+	}
+	$(function() {
+		//document.getElementByTagName('p')
+		$('p').on('click', function() {
+			$(this).css('font-size', '+=5px')
+		})
+	})
+	
+</script>
+</head>
+<body>
+<!-- 	<p onclick = "proc1(this)"> 무궁화 꽃이 피었습니다.</p> -->
+	<p> 장미 꽃도 피었습니다.</p>
+	<p> 장미 꽃도 피었습니다.</p>
+	<p> 장미 꽃도 피었습니다.</p>
+	<p> 장미 꽃도 피었습니다.</p>
+	<p> 장미 꽃도 피었습니다.</p>
+	<p> 장미 꽃도 피었습니다.</p>
+	
+	<pre>
+		$('*') -> 전체선택자 
+		
+	</pre>
+
+</body>
+</html>

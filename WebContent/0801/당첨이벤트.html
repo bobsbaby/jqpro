@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+
+<style>
+	img{
+		width : 100px;
+		height: 100px;
+	}
+</style>
+
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		
+		rand = "";
+		
+		$('#btn1').click(function(){
+			a = setInterval(function(){
+				$('img:first').appendTo('#result1');
+			}, 500);
+			
+			$('img').eq(rand).css('border', '0');
+			
+			
+		})
+		
+		$('#btn2').click(function(){
+			clearInterval(a);
+			rand = Math.floor(Math.random()*$('img').length);
+			$('img').eq(rand).css('border', '5px solid red');
+			
+		})
+	})
+	
+</script>	
+</head>
+<body>
+
+	<div class = "box">
+		- 시작 버튼 클릭 하면 이미지가 돌아간다. 
+		- 종료 버튼 클릭 하면 당첨 항목에 테두리를 설정한다. 
+		- 당첨 항목은 랜덤으로 결정한다. 
+		- 다시 시작버튼 클릭하면 테두리 설정을 해제한다. 
+		<div id = "result1">
+			<img src = "../images/image.1.jpg">
+			<img src = "../images/image.2.jpg">
+			<img src = "../images/image.3.jpg">
+			<img src = "../images/image.4.jpg">
+			<img src = "../images/image.5.jpg">
+			<img src = "../images/image.6.jpg">
+			<img src = "../images/jangman.jpg">
+			<img src = "../images/jangman2.jpg">
+			<img src = "../images/jangman3.jpg">
+		</div><br>
+		<button id = "btn1" type = "button">시작</button>
+		<button id = "btn2" type = "button">종료</button>
+		
+	</div>
+
+
+
+</body>
+</html>

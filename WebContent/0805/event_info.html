@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+
+<style>
+div {
+	width:300px;
+	height:200px;
+	background-color:yellow;
+}
+
+</style>
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('div').mousedown(function(event){
+			
+			res = console.log("target : " + event.target.tagName);
+			res += "pageXY" + event.pageX + "," + event.pageY;
+			res += "screenxy" + event.screenX + "," + event.screenY;
+			res += "button : " + event.button;
+		
+			console.log(res);
+			
+			//왼쪽버튼을 클릭하면 : 배경색 변경 
+			if(event.button==0){
+				$(this).css('background-color', 'blue');
+			//가운데 버튼 누르면 Hello 출력
+			}else if(event.button ==1){
+				$(this).text("hello");
+			
+			//오른쪽 버튼 누르면 테두리 설정
+			}else if(event.button==2){
+				$(this).css('border', '5px dotted pink');
+			}
+		})
+		$('button').click(function(event){
+			console.log("target : " + event.target.tagName);
+		})
+	})
+	
+</script>	
+</head>
+<body>
+
+<pre>
+	- button이 눌렸는지 확인하기 위해서는 mousedown을 이용하면 된다! 
+	- mouse move => 마우스를 움직이면 좌표값을 얻을 수 있다.
+</pre>
+
+<div> </div>
+ <br>
+ <button> 버튼 </button>
+</body>
+
+
+</body>
+</html>

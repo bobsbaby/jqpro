@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<style>
+	table,td,tr {
+		margin : 10px;
+		border-collapse : collapse;
+		border : 3px solid white;
+	}
+	
+	td {
+		width : 150px;
+		text-align : center;
+		font-weight : bold;
+	 }
+	
+</style>
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function() {
+		$('#btn1').click(function(){
+			$('li:first-child').css('border', '2px solid red');
+			$('li:first').css('background', 'yellow');
+		})
+		
+		$('#btn2').click(function(){
+			$('td:first-child').css('background', '#63666A' );
+			$('td:nth-child(2)').css('background', '#C1C6C8');
+			$('td:last-child').css('background', '#D9D9D6');
+		})
+	})
+</script>
+</head>
+<body>
+
+<div class = 'box'>
+	
+	<h2>자식 필터</h2>
+	- 부모 그룹에서 각각 자식을 선택한다. <br>
+	  :first-child, :last-child<br>
+	
+	  <br>
+	- 기본필터 : 전체 중에서 하나의 요소를 선택한다.<br>
+	  :first, :last
+	    
+	<h3>여자에게 인기있는 남자들</h3>
+	<ol>
+		<li>능력있는 남자</li>
+		<li>돈많은 남자</li>
+		<li>잘생긴 남자</li>
+		<li>프로그래머</li>
+	</ol>
+	<h3>남자에게 인기있는 여자들</h3>
+	<ol>
+		<li>예쁜 여자</li>
+		<li>귀여운 여자</li>
+		<li>섹시한 여자</li>
+	</ol>
+	
+	<button id = "btn1" type="button">실행</button>
+</div>
+
+<div class = 'box'>
+	
+	<h2>자식 필터</h2>
+	- 부모 그룹에서 각각 자식을 선택한다. <br>
+	  :first-child, :last-child<br>
+	  :nth-child(index) -> 구조적 의사코드(a:link a:active a:hover a:visited) -> 상태값에 의해 실행되는 것
+	  <br>
+			
+			<table border = "1">
+				<tr>
+					<td>이름</td>
+					<td>주소</td>
+					<td>전화번호</td>
+				</tr>	
+				
+				<tr>
+					<td>홍길동</td>
+					<td>대전</td>
+					<td>010-222-333</td>
+				</tr>
+				
+				<tr>
+					<td>진달래</td>
+					<td>서울</td>
+					<td>010-444-555</td>
+				</tr>
+				
+				<tr>
+					<td>개나리</td>
+					<td>부산</td>
+					<td>010-777-888</td>
+				</tr>
+				
+				<tr>
+					<td>무궁화</td>
+					<td>대구</td>
+					<td>010-555-999</td>
+				</tr>
+				
+			</table>
+	
+	<button id = "btn2" type="button">실행</button>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src = "../js/jquery-3.4.1.min.js"> </script>
+
+<script>
+	$(function(){
+		$('p').css('color', 'red');
+		//forms[1]번째 있는 p를 선택하라
+		$('p', document.forms[1]).css('font-size', '2.0em');
+		
+		$('div').on('click', function(){
+			$('p', this).css('font-size','+=10px')
+		})
+	})
+</script>
+
+</head>
+
+<body>
+
+	<pre>
+		h1 div -> h1 후손 
+		h1 #aa -> h1 후손 중에 id가 aa
+		h2#bb  -> id가 bb인 h2
+		띄워쓰면 후손 및 자식이 되고 붙혀쓰면 자신이 된다. 
+		dom 객체 - > var 
+	</pre>
+	<form>
+		<div>
+			<p>무궁화 꽃이 피었습니다.</p>
+		</div>
+	</form>
+	
+	<form>
+		<p>장미꽃도 피었습니다.</p>
+	</form>
+	
+	<form>
+		<div id = "d1">
+			<p>이건 무슨 말이지?</p>
+		</div>
+	</form>
+</body>
+</html>

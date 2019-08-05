@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel = "stylesheet" href = "../css/mystyle.css">
+
+<style type="text/css">
+	div.d{ width:500px; 
+		 height:30px; 
+         border:1px solid green;
+         font-size : 0.9em;
+          }
+</style>
+<script src = "../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function(){
+// 		$('#bnt1').on('click', function() {
+		$('#bnt1').click(function(){
+			$('span:contains(jQuery)').css('border', '2px solid blue');
+			$('span:not(:contains(jQuery))').css('border', '1px solid red');
+			$('div:has(span)').css('border', '5px solid green');
+			$('div:empty').css('border', '5px solid orange');
+			$('div.d span').css({'color': 'red', 'font-size' : '1.5em'});
+			
+			//비어있는 div에 hello를 출력하라 
+// 			$('div:empty').html('<h1>Hello~~</h1>');
+// 			$('div:empty').text('<h1>Hello~~</h1>');
+// 			$('div:empty').val('<h1>Hello~~</h1>'); -> input type, textarea 에서 사용되기 때문에 형식이 맞지 않아 적용되지 않는다. 
+		})	
+	})
+</script>
+
+</head>
+<body>
+<div class = "box">
+	<div class = "d">
+		- :first -> 문서 전체에서 첫번째 (문서 전체에서 1개만 선택됨 )
+		- :first-child -> 부모의 그룹 안에서 첫번째 자식 (부모 마다 1개가 선택됨 )
+		- :last -> 문서 전체에서 마지막
+		- :last-child -> 부모의 그룹 안에서 마지막 자식 
+		- :only-child -> 
+		
+	</div>
+	<div class = "d">헬로우~~<span>오늘도  즐겁게~열심히!</span></div>
+	<p>Hello jQuery! <span>Thanks, jQuery!</span></p>
+	<div class="myClass">jQuery!</div>
+	<span class="notMyClass d">쉬운 jQuery~~!</span>
+	<div class = "d"></div>
+	<br><br>
+	<button id = "bnt1" type ="button">실행</button>	
+</div>
+</body>
+</html>

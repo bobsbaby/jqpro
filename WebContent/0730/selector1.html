@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../css/mystyle.css">
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('button#btn1').on('click', function() {
+		
+			//h2의 자식 a 태그의 스타일에 테두리 설정 - solid
+			$('h2 > a').css('border', '2px solid #FFD9FA');
+			
+			//h2의 후손 a 태그의 스타일 배경색을 노란색으로 변경
+			$('h2 a').css('background', '#D941C5');
+		})
+		
+		$('button#btn2').on('click', function(){
+			//h3다음의 모든 형제의 배경색을 변경, 길이지정, 가운데 정렬
+			$('h3 ~ p').css({'background': '#D941C5', 'width' : '300px', 'height' : '50px', 'text-align' : 'center', 'padding' : '10px'});
+			//h3다음의 형제 중 첫번째 형제인 p를 선택 - 글자를 굵게, 크게 
+			$('h3 + p').css({'font-weight' : 'bold', 'font-size' : '1.5em'});
+		})
+		
+		$('button#btn3').on('click', function(){
+			$('span').css('background', 'yellow');
+			$('#d1  span').css('border','2px solid red');
+			$('div > span').css('border', '2px solid blue');
+		})
+	})
+</script>
+</head>
+<body>
+	<div class="box">
+		<h2>후손과 자식을 선택</h2>
+		- 자식 : $('h2 > a') : h2태그의 자식태그 a를 선택 <br> - 후손 : 자식을 포함한다. $('h2
+		a') : h2의 후손 a태그를 선택한다. <br>
+		<br>
+		<h2>
+			문단 안에 <a>링크</a> 태그가 있다 두번째 <span><a>링크</a></span> 은 손자이다
+		</h2>
+		<br>
+		<br>
+		<button id="btn1" type="button">실행</button>
+	</div>
+
+	<div class="box">
+		<h2>형제 선택</h2>
+		- 다음 형제 : $('h3 + p') : h3태그의 바로 다음에 오는 p태그 선택 <br> - 다음 모든 형제 :
+		$('h3 ~ p') : h3의 형제 중 모든 p 태그를 선택 <br>
+		<br>
+		<p>형제 선택자 에 대하여</p>
+		<h3>텔레토비 가족을 소개 합니다</h3>
+		<p>보라돌이</p>
+		<p>뚜비</p>
+		<p>나나</p>
+		<p>뽀~</p>
+
+		<br>
+		<br>
+		<button id="btn2" type="button">실행</button>
+	</div>
+
+	<div class="box">
+		<p>이 문단에는 <span>스팬</span> 엘리먼트가 있다</p>
+		<div id = "d1">
+			이 디비젼에도 <span>스팬</span> 엘리먼트가 있다
+			<p>디비젼의 내부 문단의 <span>스팬</span> 엘리먼트이다</p>
+			<div>
+				<p>내부 디비젼의 다시 문단 속 아주 <strong>깊은곳에 </strong> <em> 숨어있는 </em> <span>스팬</span>엘리먼트도 있다</p>
+			</div>
+		</div>
+
+		<button id="btn3" type="button">실행</button>
+	</div>
+
+</body>
+</html>

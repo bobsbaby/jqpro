@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('#btn1').click(function(){
+			res = "";
+			//반복문
+			$('#testForm :hidden').each(function(i){
+				if(this.tagName == "INPUT"){
+					res += "input hidden객체  :  [" + $(this).attr('name') + " : " + $(this).val() + "]<br>";
+				}else{
+					if(this.tagName != "BR"){
+					res += this.tagName + " : " + $(this).text() + "<br>";
+					}
+				}
+			})
+			$('#result1').html(res);
+		})
+		
+		$('#btn2').click(function(i){
+			res = "";
+			$('#testForm :visible').each(function(i){
+			if(this.tagName =="INPUT") {
+				res += "input vidible 객체 : [" + $(this).attr('name') + " : " + $(this).val() + "] <br>";
+			}else{
+				if(this.tagName != "BR") {
+					res += this.tagName + " : " + $(this).text() + "<br>";
+				}
+			}
+		})
+		$('#result2').html(res);
+		})
+	})
+	
+</script>
+</head>
+<body>
+
+	<div class="box">
+		<form id="testForm">
+			<input type="hidden" name="userAge" value="33"> <input
+				type="hidden" name="userCity" value="대전"> I D : &nbsp;&nbsp;<input
+				type="text" name="userID" value="hong"> <span
+				style="display: none">ID가 중복됩니다. </span> <br> 이름 : <input
+				type="text" name="userName" value="홍길동"> <span
+				style="visibility: hidden">이름을 입력하세요</span><br> 성별 : <input
+				type="radio" name="sung" value="남" checked>남자 <input
+				type="radio" name="sung" value="여">여자
+		</form>
+		<br>
+
+		<button id="btn1" type="button">hidden</button>
+		<button id="btn2" type="button">visible</button>
+		<br>
+		<div id="result1"></div>
+		<div id="result2"></div>
+
+	</div>
+</body>
+</html>

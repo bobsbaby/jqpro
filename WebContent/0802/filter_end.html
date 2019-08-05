@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<style>
+.di {
+	width: 60px;
+	height: 60px;
+	margin: 10px;
+	float: left;
+	border: 2px solid blue;
+}
+.d2 {
+	width: 60px;
+	height: 60px;
+	margin: 10px;
+	float: left;
+	border: 2px solid blue;
+}
+
+.blue {
+	background: blue;
+}
+
+.lightblue {
+	background: lightblue;
+}
+
+.orange {
+	background: orange;
+}
+
+br {
+	clear : both;
+}
+</style>
+
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('#btn1').click(function(){
+		/*
+			$('div').filter(':odd').eq(0).css('background', 'blue');
+			$('div').filter(':odd').eq(1).css('background', 'green');
+			$('div').filter(':odd').eq(2).css('background', 'pink');
+			*/
+			$('div').filter(':odd').eq(0).css('background', 'blue')
+								.end().eq(1).css('background', 'green')
+								.end().eq(2).css('background', 'pink');
+		})
+		
+		$('#btn2').click(function(){
+		//처음 시작은 eq1번째 
+			$('.d2').eq(1).css('border', '5px solid green')
+// 			$('.d2:eq(1)')
+// 			$('.d2').filter(':eq(1)')
+		//앞뒤 형제 모두 파란색 테두리(기준은 변화지 않음)
+							.siblings().css('border', '5px solid purple')
+		//다시 되돌아와서 e1(1) -> end() : 기준을 전 단계로 돌아간다.
+							.end().next().html('세번째 third')	
+		//다시 되돌아와서 뒤 모든 형제들 배경색 노란색으로 변경
+							.end().nextAll().css('background','yellow')
+		//다시 도돌아와서 앞형제 배경색 변경 초록색으로 
+							    .end().prev().css('background','green');
+		})
+		
+		
+		
+	})
+	
+</script>
+</head>
+<body>
+
+	<pre>
+	<strong>end()</strong>
+ - 실행을 한단계 앞으로 되돌려 기존 선택을 기준으로 새로운 필터링을 한다.<br>
+ - 홀수번째 요소를 선택해서 배경 색을 변경
+ - siblings() : nextAll() + prevAll() -> 모든 형제 
+ - contents(), childredn() : 자식을 찾는다
+ - find() : 후손을 찾는다 
+ - 파라미터 들어가는 것 : parents(pra) -> 앞 뒤의 조상들 중에 pra의 조상을 찾아라, siblings(),
+ - parents() -> 모든 조상을 찾아라 
+ - nextuntil -> 다음 형제중 ~부터 ~까지 
+ - prevuntil -> 이전 형제들 중 ~부터 ~까지 
+ - add() : a.add(b) a에 b를 추가해라 
+</pre>
+
+	<div class="di">a</div>
+	<div class="di">b</div>
+	<div class="di">c</div>
+	<div class="di">d</div>
+	<div class="di">e</div>
+	<div class="orange di">f</div>
+	<div class="di">g</div>
+	<br>
+	<br>
+	<button id="btn1" type="button">실행</button>
+
+	<pre>
+	<strong>end()</strong>
+		첫번째 div를 기준으로 새로운 필터링을 수행한다. <br>
+		$(“div”).eq(1) .css()<br>
+		앞뒤 형제 모두 파란색 테두리  - siblings()<br>
+		다시 되올아와서 (eq(1) ) - -<br>
+		바로 다음 형제 (next() )의 text변경—세번쩨third <br>
+		다시 되돌아와서  -- <br>
+		뒤 모든 형제(nextAll() )들 배경색 변경-노란색 <br>
+		다시 되돌아와서 – <br>
+		 앞 형제(prev() ) 배경색 변경  -  그린 <br>
+		 -clear both를 위해서는 block요소가 필요하다. 
+		 button은 block요소가 아니므로 clear both를 적용해도 적용되지 않는다.
+</pre>
+	<div>
+		<div class="d2">a</div>
+		<div class="d2">b</div>
+		<div class="d2">c</div>
+		<div class="d2">d</div>
+		<div class="d2">e</div>
+		<div class="lightblue d2">f</div>
+		<div class="d2">g</div>
+	</div>
+	<br>
+	<br>
+	<button id="btn2" type="button">실행</button>
+
+
+</body>
+</html>

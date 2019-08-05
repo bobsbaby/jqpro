@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<script src = "../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function(){
+		$('button').on('click', function() {
+			
+			jq = $('h1');
+			jq.css('color', 'blue');
+			
+			//전체 h1중에서 한가지만(2번째 h1) 선택할 경우 - dom 객체를 리턴
+			dom = jq.get(2); //jq[2]
+// 			dom.css('color', 'red'); -> dom 객체 변수로 css jQuery함수를 호출할 수 없다. 
+			dom.style.color = 'red';	//dom 객체에 스타일 적용
+			
+			//$()로 감싸주면 jquery객체변수가 되어서 css함수 호출 가능 
+			$(dom).css('color','green');
+			
+			//전체 h1중에서 3번째 h1선택할 경우 -jquery객체를 리턴 
+			//jq3 = jq.eq(3);
+			jq3 = $('h1:eq(3)')	// h1 선택자 사용시 $ 사용
+			jq3.css('color', 'hotpink');
+		})		
+	})
+</script>
+</head>
+<body>
+	<div class = "box">
+		<h2> dom 객체와 jquery 객체 반환 </h2>
+		jquery를 dom으로 반환 : jquery객체.get[N] / jquery객체[N]<br>
+		dom 객체를 jquery객체로 반환 : $(dom 객체 )<br>
+		<br>
+		jq = $('h1');<br>
+		jq.css('color', 'blue');<br>
+		
+		<br><br>
+		
+		-jquery 객체를 dom으로 변환 <br>
+		dom = jq.get(2); //jq[2]<br>
+		dom.style.color = 'red';<br>
+		
+		-dom 객체를 jquery로 변환 <br>
+		$(dom).css('color','green');<br>
+		
+		-전체 h1 중에서 세번째 선택 : jquery <br>
+		jq3 = $('h1:eq(3)')	// h1 선택자 사용시 $ 사용<br>
+		jq3.css('color', 'hotpink');<br>
+		<br>
+		<h1>무궁화 꽃이 피었습니다1</h1>
+		<h1>무궁화 꽃이 피었습니다2</h1>
+		<h1>무궁화 꽃이 피었습니다3</h1>
+		<h1>무궁화 꽃이 피었습니다4</h1>
+		<h1>무궁화 꽃이 피었습니다5</h1>
+	
+	<button type = "button">실행</button>
+	<pre>
+* jquery eq를 사용하면 jquery객체를 리턴해서 $기호를 안 써줘도 된다. 
+* dom get을 사용하면 dom 객체가 되어 css를 적용시키기 위해 style로 적용시켜줘야 한다. 
+
+body -> div -> h2, p, button
+body의 후손 -> body p(body의 후손 중 p태그)
+div > button (div의 자식 중 button)
+h2 + p -> h2 바로 뒤에 있는 p태그 (1개만 선택) 
+h2 ~ p -> h2의 형제 중 모든 p태그 선택 (다중)-> h2의 위치 다음에 있는 p 태그만 선택된다
+
+E1 E2 -> E1 의 자식 요소 중 모든 E2 요소 (후손)
+E1 > E2 -> E1의 바로 아래 자식 요소 중 모든 E2 요소 (자식)
+E1 + E2 -> E1의 바로 다음에 나오는 형제요소 중 E2 요소
+E1 ~ E2 -:> E1의 다음에 나오는 형제요소 중 모든 E2 요소 
+
+	</pre>
+	</div>
+
+</body>
+</html>

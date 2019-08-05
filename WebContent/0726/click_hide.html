@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src = "../js/jquery-3.4.1.min.js"> </script>
+<script>
+	$(function(){
+		$('h2').on('click', function(){
+			
+			//$(this).css('display', 'none');
+			$(this).hide();
+			
+			if($('h2:visible').length == 0){
+				//$('button').show();
+				$('button').css('display', 'block');
+			}
+		})
+		$('button').on('click', function(){
+			hlist -> jquery 객체  = $('h2')
+			hlist.show();
+			$('h2').show();
+			$(this).hide();
+		})
+	})
+</script>
+<style>
+	button {
+		display : none;
+	}
+</style>
+
+</head>
+<body>
+<h2> 클릭하면 사라집니다1. </h2>
+<h2> 클릭하면 사라집니다2. </h2>
+<h2> 클릭하면 사라집니다3. </h2>
+<h2> 클릭하면 사라집니다4. </h2>
+<h2> 클릭하면 사라집니다5. </h2>
+<h2> 클릭하면 사라집니다6. </h2>
+<h2> 클릭하면 사라집니다7. </h2>
+<h2> 클릭하면 사라집니다8. </h2>
+<h2> 클릭하면 사라집니다9. </h2>
+<h2> 클릭하면 사라집니다10. </h2>
+
+<pre>
+	$('h2') -> 모든 h2가 선택됨 
+	$(this) -> 12개 중 1개만 선택 
+	this는 전역변수이므로 ''안에 안 넣어줘도 된다 
+	show -> 보이기 (css에서는 display block)
+	hide -> 사라지기(css에서는 diplay none )
+	show, hide 는 jquery effect에 해당 
+	$() : jquery 함수, $() 함수의 인수로 다른 함수를 전달하면 문서가 로드될때 콜백함수를 등록한다.
+	콜백함수!
+	$(선택자, [컨텍스트]) -> 선택자로 작업대상 엘리먼트를 검색한다. 
+					  -> 컨텍스트는 검색의 시작점을 지정, 생략하면 문서전체에서 검색 
+	hlist -> jquery 객체  = $('h2')
+	hlist.show();				   
+	this - > 현재 무언가를 실행하는 객체 
+ 	$('p',this) -> this(부모)안에서 p를 선택해라
+</pre>
+
+<button type = "button">보이기</button>
+
+</body>
+</html>

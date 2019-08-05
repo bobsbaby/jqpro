@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<style>
+	table{
+		width : 500px;
+		height : 30px;
+		text-align : center;
+		border-collapse : collapse;
+	}
+</style>
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<script src = "../js/jquery-3.4.1.min.js"></script>
+<script>
+	$(function(){
+		
+		$('#btn1').on('click', function(){
+			
+			$('li:first, li:last').css('background', 'yellow');
+			$('li:lt(4)').css({'font-size' : '1.5em', 'font-weight' : 'bolr'});
+			$('li:eq(5)').css('backgrounr', 'rer');
+			$('li').css({'wirth' : '200px', 'height' : '30px', 'list-style-type': 'none', 'parring' : '10px'} );
+		})
+		
+		$('#btn2').on('click', function(){
+			$('tr:even', $(this).parent()).css('background', 'gray');
+			$('tr:odd', $(this).parent()).css('background', 'white');
+		})
+		
+		$('#btn3').on('click', function(){
+			$('tr:even', $(this).parent()).css('background', 'pink');
+			$('tr:odd', $(this).parent()).css('background', 'gray');
+		})
+		
+		$('#btn4').on('click', function(){
+			$('tr:odd', $(this).parent()).css('background', 'white');
+			$('tr:even', $(this).parent()).css('background', 'gray');
+			$('tr:first', $(this).parent()).css({'background': 'black', 'color' : 'white'});
+			
+		})
+		
+	})
+</script>
+</head>
+<body>
+
+	<div class = "box">
+		<h3>기볼필터 </h3>
+		  - :first, :last, :even, :odd, :gt(index), :eq(index), :lt(index)
+		  - index는 0부터 시작된다
+		<div>  
+			<ul>
+				<li> one </li>
+				<li> two </li>
+				<li>  three </li>
+				<li> four </li>
+				<li> five </li>
+				<li> six</li>
+				<li> seven</li>
+				<li>eight</li>
+				<li>nine</li>
+			</ul>
+		</div>
+		<button id = "btn1" type = "button">실행</button>
+	</div>
+	
+	<div class = "box">
+		<h3>기볼필터 </h3>
+		  - :even, :odd
+		  - index는 0부터 시작된다
+		<div>  
+			<table border = "1">
+				<tr>
+					<td>one</td>
+					<td>62만원</td>
+				</tr>	
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+			</table>
+		</div>
+		<button id = "btn2" type = "button">실행</button>
+	</div>
+	
+		<div class = "box">
+		<h3>기볼필터 </h3>
+		  - :even, :odd
+		  - index는 0부터 시작된다
+		<div>  
+			<table border = "1">
+				<tr>
+					<td>one</td>
+					<td>62만원</td>
+				</tr>	
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+				<tr>
+					<td>two</td>
+					<td>45만원</td>
+				</tr>
+				
+			</table>
+		</div>
+		<button id = "btn3" type = "button">실행</button>
+	</div>
+	
+			<div class = "box">
+		<h3>기볼필터 </h3>
+		  - :even, :odd
+		  - index는 0부터 시작된다
+		<div>  
+			<table border = "1">
+				<tr>
+					<th>이름</th>
+					<th>주소</th>
+				</tr>	
+				
+				<tr>
+					<td>홍길동</td>
+					<td>대전</td>
+				</tr>
+				
+				<tr>
+					<td>진달래</td>
+					<td>서울</td>
+				</tr>
+				
+				<tr>
+					<td>개나리</td>
+					<td>부산</td>
+				</tr>
+				
+				<tr>
+					<td>무궁화</td>
+					<td>대구</td>
+				</tr>
+				
+			</table>
+		</div>
+		<button id = "btn4" type = "button">실행</button>
+	</div>
+	
+</body>
+</html>

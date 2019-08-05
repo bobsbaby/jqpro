@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		str = "";
+		$('#contents').click(function(){
+			$('#d1').contents().each(function(i){
+				
+// 				str += i +" 번째 태그 이름 : " +this.tagName + "내용 :"+$(this).html() + "<br>";
+				//태그 이름이 undefined일 경우 typeof로 비교한다.
+				if(typeof this.tagName == "undefined"){
+					//태그 없는 자식 요소 중 공백 요소는 걸러낸다.
+					if($(this).text().trim().length>0){
+					str += i + "번째 문자열 : " + $(this).text() + "<br>";
+					}
+				}else{
+					str += i +" 번째 태그 이름 : " +this.tagName + "내용 :"+$(this).html() + "<br>";
+				}
+				
+			})
+			$('#result1').html(str) + "<br>";
+		})
+		
+		
+		str = "children <br>";
+		$('#children').click(function(){
+				$('#d1').children().each(function(i){
+				
+						str += i +" 번째 태그 이름 : " +this.tagName + "내용 :"+$(this).html() + "<br>";
+				
+				})
+				$('#result2').html(str) + "<br>";
+		})
+	})
+	
+</script>
+</head>
+<body>
+	<pre>
+		contents : 자식 요소들의 내용을 가지고 온다., 태그 여부에 상관 없이 선택 대상이 된다. 
+		children : 태그가 있는 자식 요소들만을 대상으로 선택
+		prop () : 전체동의 선택 / 해제 할 때 사용
+		
+		- readonly -> 읽을수만 있는 
+		- $(selector).prop("속성명", 값);   -> setter
+		- $(selector).prop("속성명"); -> getter
+		
+	</pre>
+	<div class="box">
+		<div id="d1">
+			a
+			<p>ptag</p>
+			<span>스판 <span>스판 또 스판</span>
+			</span>
+		</div>
+		<br>
+		<br>
+		<button id="contents" type="button">contents</button>
+		<button id="children" type="button">children</button>
+		<div id="result1"></div>
+		<div id="result2"></div>
+	</div>
+</body>
+</html>
