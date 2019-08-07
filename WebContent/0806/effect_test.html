@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<script>
+ $(function(){
+	 
+	 $('#show').click(function(){
+		/*  $('img#img1').show(3000, "swing", function(){
+			 alert("아이스커피 나왔습니다");
+		 }); 
+		  */
+		 $('img').show(3000, "swing");
+		 alert("아이스커피 나왔습니다");
+		 
+		// $('img').show(3000, "linear");
+	 })
+	 $('#hide').click(function(){
+		 $('img#img1').hide(500);
+	 })
+	 $('#toggle').click(function(){
+		 $('img#img1').toggle('slow');
+	 })
+	 
+	 $('#sup').click(function(){
+		 $('img#img1').slideUp(1000);
+	 })
+	 $('#sdown').click(function(){
+		 $('img#img1').slideDown(1000);
+	 })
+	  $('#stoggle').click(function(){
+		 $('img#img1').slideToggle(1000);
+	 })
+	 
+	 $('#fin').click(function(){
+		$('img#img1').fadeIn(1000, 'linear')
+	 })
+	 $('#fout').click(function(){
+		 $('img#img1').fadeOut(1000, 'linear')
+	 })
+	 $('#fto').click(function(){
+		 $('img#img1').fadeTo(1000,0.5);
+	 })
+	 $('#ftoggle').click(function(){
+		 $('img#img1').fadeToggle(1000, 'linear')
+	 })
+	 
+	 
+	 $('img#coff').click(function(){
+		// $(this).addClass('clength');
+		$(this).toggleClass('clength');
+	 })
+	 $('img#coff').hover(function(){ 
+		 $(this).addClass('cborder');
+	 }, function() {
+		 $(this).removeClass('cborder');
+	 })
+	 
+	 
+	 $('h1').hover(function(){
+		 $(this).addClass('cback');
+	 }, function(){
+		 $(this).removeClass('cback');
+	 })
+ })
+</script>
+<style>
+ img{
+   width : 100px;
+   height: 100px;
+ }
+ 
+ .clength{
+    width : 130px;
+    height: 130px;
+ }
+ .cborder{
+    border : 5px solid orange;
+ }
+ 
+ .cback{
+    background : crimson;
+ }
+ 
+</style>
+</head>
+<body>
+ <div class="box">
+ <h3>effect </h3>
+ 
+ 
+ 
+  <button  id="show" type="button">show</button>
+  <button  id="hide" type="button">hide</button>
+  <button  id="toggle" type="button">toggle</button>
+  
+  <button  id="sup" type="button">slideup</button>
+  <button  id="sdown" type="button">slidedown</button>
+  <button  id="stoggle" type="button">slidetoggle</button>
+  
+  <button  id="fin" type="button">fadein</button>
+  <button  id="fout" type="button">fadeout</button>
+  <button  id="fto" type="button">fadeto</button>
+  <button  id="ftoggle" type="button">fadetoggle</button>
+  <hr>
+  <br>
+  <img id="img1" src="../images/coffee1.jpg">
+ </div>
+ 
+ <div class="box">
+  <h3>css 관련메소드 </h3>
+ - addClass() removeClass() toggleClass()<br>
+ - sttyle에 클래스를 미리 지정하고 css()메소드 대신 사용 <br>
+ - 이미지를 클릭하면 크기를 변경 <br>
+ - 이미지 hover시 테두리를 설정 및 해제 <br><br>
+  
+   <img id="coff" src="../images/coffee1.jpg">
+   <br>
+   <h1>아메리카노</h1>
+   <h1>카페라떼</h1>
+   <h1>카푸치노</h1>
+   <h1>에스프레소</h1>
+  
+ </div>
+</body>
+</html>
+
+
+
+
+
+
+

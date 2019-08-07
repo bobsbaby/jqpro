@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<script>
+ $(function(){
+	 
+	 $('.guess_box').on('click', function(){
+		 
+		 $('.pg').remove();
+		 //랜덤 생성 5 ~ 10
+		 rand = Math.floor(Math.random()*6 + 5);
+		 
+		 //새로운 p태그를 새성 
+		 ptag =   $('<p/>', {
+			       'class' : 'pg',
+			       'text'  : '할인률 : ' + rand + "%"
+	 	   })
+		 
+		  //guess_box에 추가 
+		 //$(this).append(ptag);
+		 $(ptag).appendTo(this);
+		 
+		// $(this).off('click');
+		 $(this).unbind('click');
+	 })
+	 
+	 
+	 $('img').hover(function(){
+		 //$(this).css('border', '2px solid blue');
+		 $(this).addClass('cborder');
+	 }, function(){ 
+		 //$(this).css('border', 'none');
+		 $(this).removeClass('cborder');
+	 })
+	 
+ })
+</script>
+<style>
+  .cborder{
+     border : 2px solid blue;
+  }
+
+  #main{
+    width : 570px;
+    height : 250px;
+    background: lightgray;
+  }
+  
+  .guess_box{
+    float : left;
+    width : 130px;
+    height : 180px;
+    background : gray;
+    margin : 1px;
+    padding : 5px;
+  }
+  img{
+    width : 128px;
+    height : 120px;
+  }
+  
+</style>
+</head>
+<body>
+<div id="header">
+   <h2> Jump for Joy Sale </h2>
+</div>
+<div id="main">
+   <div class="guess_box"><img src="../images/풍차.jpg" /></div>
+   <div class="guess_box"><img src="../images/대나무숲.jpg" /></div>
+   <div class="guess_box"><img src="../images/산.png" /></div>
+   <div class="guess_box"><img src="../images/셔틀콕.jpg" /></div>
+</div>
+</body>
+</html>

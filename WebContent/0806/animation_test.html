@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<script>
+ $(function(){
+	 $('#left').click(function(){
+		$('img').animate({ left:'+=100px' , width : "+=30px" }, 1000);
+	 })
+	 $('#right').click(function(){
+		 $('img').animate({ left:'-=100px' }, 500)
+		         .delay(1000)
+		         .animate({ width : '-=30px' }, 500)
+	 })
+	 
+	 $('#opc').click(function(){
+	
+		 setInterval(function(){ 
+			 
+			 
+		   $('img').animate({ left:'+=100px'},500)
+		          .animate({ opacity : '-=0.8'}, 500)
+		          .delay(1000)
+		          .animate({ left:'-=100px'},500)
+		          .animate({ opacity : '+=0.8'}, 500)
+			 
+		 }, 1000);
+	 
+	 })
+	 
+ })
+</script>
+<style>
+  img{
+    width : 100px;
+    height : 100px;
+    position : relative;
+  }
+</style>
+</head>
+<body>
+<pre>
+ <h3>animation</h3>
+ - animate()메소드 이용<br>
+ - css 속성과 millisec단위의 지속시간이 매개변수로 온다<br>
+ - left : 100px  : 왼쪽좌표를 100px로 변경 , 오른쪽으로 이동하는 효과 <br>
+ - 이동하는 대상에 position 속성을 style에 설정 <br>
+</pre>
+ <button id="left" type="button">오른쪽으로 이동 </button>
+ <button id="right" type="button">왼쪽 이동 </button>
+ <button id="opc" type="button">이동/투명도 </button>
+ 
+ <br><br>
+ <img src="../images/image.5.jpg">
+</body>
+</html>
+
+
+
+

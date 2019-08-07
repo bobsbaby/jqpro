@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<style>
+	div{
+		width : 50px;
+		height : 50px;
+		background : green;
+		display : none;
+		position : relative;
+	}
+	
+	h2 {
+		position : relative;
+	}
+	
+</style>
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('button#btn2').bind('click', function(){
+			//div를 오른으로 200px 움직이게 한다. 
+			//animate에서는 거리로 움직이는 속성만 사용 가능 
+			$('div').show(); //css('display'. 'block') 를 지정해서 display해주면 된다.
+			$('div').animate({left : '200px'}, 1000)
+			//0.5초동안 지연시킨다. 
+					.delay(500);
+			
+			//색상 변경 
+			$('div').queue(function(){
+				//this.queue 내에서는 거리 이외의 속성도 사용 가능 
+				$(this).css('background','red');
+				//queue를 빠져나온다. 
+				$(this).dequeue();
+			})
+			$('div').animate({left : '-=200px'}, 1000)
+					.delay(500);
+			
+			$('div').queue(function(){
+				//this.queue 내에서는 거리 이외의 속성도 사용 가능 
+				$(this).css('background','green');
+				//queue를 빠져나온다. 
+				$(this).dequeue();
+			})
+		})
+		$('button#btn1').click(function(a){
+			setInterval(function() {change();} ,1000)
+		})
+		
+		function change(){
+		$('h2').animate({left : '200px', 'font-size' : '+=1.5em'}, 1000);
+		r = Math.floor(Math.random()*256);
+		g = Math.floor(Math.random()*256);
+		b = Math.floor(Math.random()*256);
+		
+		r = r.toString(16);
+		g = g.toString(16);
+		b = b.toString(16);
+		
+		$('h2').queue(function(){
+		$(this).css('color','#'+r+g+b);
+		$(this).dequeue();
+		
+		})
+		
+		$('h2').animate({left : '-=200px', 'font-size' : '-=1.5em'}, 1000)
+		$('h2').queue(function(){
+		$(this).css('color','black');
+		$(this).dequeue();
+		})
+	}
+		
+	})
+	
+	
+</script>	
+</head>
+<body>
+	<pre>
+		움직이는 속성을 주기 위해서는 style에 positon속성을 주어야 한다. 
+		움직이는 속성을 위해서는 animate method를 사용한다. 
+		
+		ajax -> dom에서 xmlhttprequest객체를 얻어 객체를 가지고 request를 요청하면 결과를 만들어 json문서로 만든 후 배포해준다. 
+				요청 
+				open -> get/쿼리스트링 /동기(false) -> 내용을 가져온 다음에 작업을 진행해야 할 경우 (ex. 수정), 비동기(true)
+				send -> get방식일때는 url에 쿼리스트링으로 작성 
+				
+				요청 
+				data = "name=korea"
+				open(post,fitst.jsp, ture)
+				setRequestHeader -> data가 들어감(query 데이터)
+				send(data)
+				
+				응답 
+				onreadystatechange 
+				readystate(응답 상태) -> 값이 4까지 있는데 값이 4가 되어야 성공했다는 의미, status 200 
+				404 ->file not found
+				500 -> compile error
+				
+				
+				응답을 받을 때에는 responseText로 받는다. 
+				text로 받은 내용을 -> text, html, xml, json으로 변환해서 사용
+				
+				JSON은 두개의 구조를 기본으로 두고 있다:
+
+				1. name/value 형태의 쌍으로 collection 타입. 다양한 언어들에서, 이는 object, record, struct(구조체), dictionary, hash table, 키가 있는 list, 
+				     또는 연상배열로서 실현 되었다.
+				2. 값들의 순서화된 리스트. 대부분의 언어들에서, 이는 array, vector, list, 또는 sequence로서 실현 되었다.
+				
+				
+				
+		동기 ->  서버와 클라이언트가 1:1로  클라이언트가 요청 서버가 응답/ 클라이언트의 요청에 의하여 서버의 응답이 1개 온다. 
+			      요청과 응답이 1:1로 진행됨 	
+			    jsp, servlet 
+		비동기 -> 요청 후 응답을 기다리지 않고 다른 요청을 할 수 있다. 
+				
+	</pre>
+	<button id = "btn2" type = "button"> 실행 </button>
+	<hr><br>
+	<div></div>
+	<br><hr>
+	<pre>
+	문자열을 오른쪽으로 이동하면서 글자 크기를 확대 (+=), 글자색을 랜덤으로 변경
+	왼쪽으로 이동하면서 글자크기를 축소 , 글자색은 검정
+	1초마다 한번씩 계속 수행한다. 
+	
+	$('h2').css('background' : 'rgb(134,235,128)') 
+	$('h2').css('background' : 'rgb(100%, 93%, 78%)') 
+	$('h2').css('background' : '#f4de9a') 
+	16진수로 변환하는 방법 
+	r = r.toString(16);
+	</pre>
+	<button id = "btn1" type = "button">실행</button>
+	<h2>무궁화 꽃이 피었습니다.</h2>
+
+</body>
+</html>

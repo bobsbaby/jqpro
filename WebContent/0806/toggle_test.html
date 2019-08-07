@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<script>
+ $(function(){
+	 $('a').bind('click', function(){
+		 event.preventDefault(); 
+		 
+		 $('div').toggle();
+		 
+	 })
+	 
+	 //$('h1.hh').mouseover(function(){})
+	 //$('h1.hh').mouseout(function(){})
+	 
+	/*  $('h1.hh').bind('mouseover', function(){
+		 $(this).css('background', 'lime');
+	 })
+	 $('h1.hh').bind('mouseout', function(){ 
+		 $(this).css('background', 'white');
+	 }) */
+	/*  
+	$('h1.hh').hover(function(){
+		 $(this).css('background', 'lime');
+	}, function(){
+		$(this).css('background', 'white');
+	}) 
+	 */
+ })
+</script>
+<style>
+ div{
+   display : none;
+ }
+ 
+ .hh:hover{
+     background: pink;
+ }
+</style>
+</head>
+<body>
+<pre>
+  toggle(); show(). hide()가 번갈아 가면서 수행 <br>
+   자세히 보기를 클릭하면 toggle()메소드가 실행된다
+</pre>
+ <h1>이순신</h1>
+ <h2>조선시대의 명장</h2>
+ <a href="#">자세히보기</a>
+ <br>
+ <div>
+    이순신(李舜臣, 1545년 4월 28일 ~ 1598년 12월 16일 (음력 11월 19일))은 조선 중기의 무신이다. 본관은 덕수(德水), 자는 여해(汝諧), 시호는 충무(忠武)이며, 한성 출신이다. 문반 가문 출신으로 1576년(선조 9년) 무과(武科)에 급제[2]하여 그 관직이 동구비보 권관, 훈련원 봉사, 발포진 수군만호, 조산보 만호, 전라좌도 수군절도사를 거쳐 정헌대부 삼도수군통제사에 이르렀다.
+ </div>
+ <hr>
+ <pre>
+   hover(fn1, fn2) : mouseover와  mouseout 이벤트를 실행 
+ </pre>
+ <h1 class="hh">아메리카노</h1>
+ <h1 class="hh">카푸치노</h1>
+ <h1 class="hh">카페라떼</h1>
+ <h1 class="hh">에소프레스</h1>
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
