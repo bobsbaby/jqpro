@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('#btn1').on('click',function(){
+// 			$('#name').val();
+// 			$('tel').val();
+			$('#f1').attr('action', 'jsonpost.jsp')
+					.attr('method', 'post');
+			
+			$('#f1').submit();
+		})
+		$('#btn2').on('click', function(){
+			xhr = new XMLHttpRequest();
+			
+			vname = $('#ajname').val();
+			vtel = $('#ajtel').val();
+			
+			
+			//요청
+			xhr.open("POST",'jsonpost.jsp', true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			//post방싱은 send에 data를 넣어줘야 한다. ""사이에 공백을 주면 안 된다.
+			xhr.send("name=" + vname + "&tel=" + vtel);
+			
+			//응답 : 데이터는 text일 수도 있고 json, xml, html일수도 있는데 
+			xhr.onreadystatechange=function(){
+				if(this.readyState ==4 && this.status ==200) {
+					datas = this.responseText
+				$('#result2').html(datas);
+				}
+			}
+		})
+		
+		$('#btn3').on('click',function(){
+			xhr = new XMLHttpRequest();
+			
+			vname = $('#ajname').val();
+			vtel = $('#ajtel').val();
+			
+			
+			//요청
+			xhr.open('POST','jsonpost2.jsp', true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			//post방싱은 send에 data를 넣어줘야 한다. ""사이에 공백을 주면 안 된다.
+			xhr.send("name=" + vname + "&tel=" + vtel);
+			
+			//응답 : 데이터는 text일 수도 있고 json, xml, html일수도 있는데 
+			xhr.onreadystatechange=function(){
+				if(this.readyState ==4 && this.status ==200) {
+					datas = JSON.parse(this.responseText)
+				
+				res = "";
+				res += "이름 : " + datas.name + "<br>";
+				res += "전화번호 :" + datas.tel + "<br>";
+				res += "<h2>즐거운 하루 되세요 </h2>";
+				$('#result3').html(res);
+				}
+				}
+			})
+		
+	})
+	
+</script>	
+</head>
+<body>
+
+<div class="box">
+
+	<pre>
+	post방식 -> 
+	content type이 필요 application/x-www-form-urlencoded
+	web-inf lib 폴더에 (ibatis, ojbdc6 jar 파일을 넣는다)
+	java resources 안에 source folder 생성
+	</pre>
+	<h3>Ajax를 사용하지 않는 방법</h3>
+	- 응답 결과 페이지를 전체로 다시 로드하지 않고 div result영역에 출력한다.   <br>
+	- jsonpost.jsp를 요청하고 응답받는다.  <br>
+	- 응답시 결과 페이지를 전체 로드해서 보관한다.   <br>
+	<form  id="f1">
+		이름 : <input type="text" name="name" id="name"><br> 
+		전화번호 : <input type="text" name="tel" id="tel"><br>
+		<button id="btn1" type="button">실행</button>
+	</form>
+	<br>
+	<div id="result1"></div>
+</div>
+<div class="box">
+	<h3>Ajax를 사용하는 방법</h3>
+	-text 실행시 	jsonpost.jsp 	text 형태의 데이터를 생성 <br>
+	-json 실행  ; jsonpost2.jsp	json object 형태의 데이터 생성 <br>
+	<form id="f2" action="ajax.jsp" method="get">
+		이름 : <input type="text" name="ajname" id="ajname"><br>
+		전화번호 : <input type="text" name="ajtel" id="ajtel"><br>
+		<button id="btn2" type="button">text실행</button>
+		<button id="btn3" type="button">json실행</button>
+	</form>
+	<br>
+	<div id="result2"></div>
+	<div id="result3"></div>
+</div>
+
+</body>
+</html>

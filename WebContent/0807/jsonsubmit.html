@@ -1,60 +1,83 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
 
-<link rel = "stylesheet" href = "../css/mystyle.css">
-<script src = "../js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="../css/mystyle.css">
 
 <script>
-	$(function(){
-		$('#btn1').on('click', function(){
-			//입력한 값을 가져온다. 
-			
-			//서버로 전송한다. 
-			$('#f1').attr('action', 'jsonsubmit.jsp')
-					.attr('method', 'get');
-			$('#f1').submit();
-			
-		})
-			
-		$('#btn2').on('click',function(){
-			xhr = new XMLHttpRequest();
-			xhr.open('get', 'jsonsubmit.jsp', true);
-			xhr.send();
-			
-			xhr.onreadystatechange = function(){
-				if(this.readyState == 4 && this.status == 200){
-					
-				}
-			}
-		})
+$(function (){
+	
+	var xhr = new XMLHttpRequest();
+	
+	$('#btn1').click(function(){
+		//입력한 값을 가져온다
+		$('#name').val();
+		$('#tel').val();
+		
+		//서버로 전송한다. button submit
+		$('#f1').attr('action', 'jsonsubmit.jsp')
+		        .attr('method', 'get');
+		$('#f1').submit();
 	})
 	
-</script>	
+	$('#btn2').click(function(){
+		
+		a = $('#ajname').val();
+		b = $('#ajtel').val();
+		
+		xhr.open('GET', 'jsonsubmit2.jsp?name=' + a + '&tel=' + b, true);
+		xhr.send();
+		
+		xhr.onreadystatechange = function() {
+			if(this.readyState == 4 && this.status == 200){
+				
+				datas = JSON.parse(this.responseText);
+				
+				code = "";
+				code +=  datas.name + "씨(전화번호 : " + datas.tel + ") 안녕하세요. AJax를 공부합니다.";
+				
+				$('#result2').html(code);
+			}
+		}
+	})
+});
+</script>
 </head>
 <body>
-	<div class = "box">
-		<h3>Ajax를 사용하지 않는 방법 </h3>
-		<form id = "f1">
-			이름 : <input type = "text" id = "name" name = "name"> <br>
-			전화번호 : <input type = "text" id = "tel" name = "tel"><br>
-			<button id = "btn1" type = "button">실행</button>
-		</form>
-		<br>
-		<div id = "result1"></div>
-	</div>
-	
-	<div class = "box">
-		<h3>Ajax를 사용하는 방법 </h3>
-		<form id ="f2">
-			이름 : <input type = "text" id = "name" name = "name"> <br>
-			전화번호 : <input type = "text" id = "tel" name = "tel"><br>
-			<button id = "btn2" type = "button">실행</button>
-		</form>
-		<br>
-		<div id = "result2"></div>
-	</div>
+<div class="box">
+	<h3>Ajax를 사용하지 않는 방법</h3>
+	<form  id="f1">
+		이름 : <input type="text" name="name" id="name"><br> 
+		전화번호 : <input type="text" name="tel" id="tel"><br>
+		<button id="btn1" type="button">실행</button>
+	</form>
+	<br>
+	<div id="result1"></div>
+</div>
+<div class="box">
+	<h3>Ajax를 사용하는 방법</h3>
+	<form id="f2" action="ajax.jsp" method="get">
+		이름 : <input type="text" name="ajname" id="ajname"><br>
+		전화번호 : <input type="text" name="ajtel" id="ajtel"><br>
+		<button id="btn2" type="button">실행</button>
+	</form>
+	<br>
+	<div id="result2"></div>
+</div>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
