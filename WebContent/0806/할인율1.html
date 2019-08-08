@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+
+<style>
+	.cborder {
+		border : 5px solid yellow;
+	}
+
+	#main {
+	    width : 1000px;
+	    height : 400px;
+		background : #F65E5E;
+		text-align : center;
+	}
+	
+	.guess_box {
+		float : left;
+		width : 200px;
+		height : 300px;
+		background : #F6C9C9;
+		margin : 15px;
+		padding : 10px;
+	}
+	
+	img {
+		width : 150px;
+		height : 150px;
+		padding-top : 10px;
+	}
+	
+
+</style>
+
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('.guess_box').on('click', function(){
+			
+			$('.pg').remove();
+			
+			rand = Math.floor(Math.random()*6 + 5);
+			
+			ptag = $('<p/>', {
+				     'class' : 'pg',
+				     'text' : '할인률 : ' + rand + "%"
+			})
+			
+			$(this).append(ptag);
+			
+		})
+		
+		$('img').hover(function(){
+			$(this).addClass('cborder');
+		}, function(){
+			$(this).removeClass('cborder');
+		})
+		
+	})
+	
+</script>	
+</head>
+<body>
+
+<div id = "header">
+	<h2>Jump for Joy Sale</h2>
+
+
+<div id = "main">
+	<div class = "guess_box"><img src = "../images/jang1.jpg"></div>
+	<div class = "guess_box"><img src = "../images/jang2.jpg"></div>
+	<div class = "guess_box"><img src = "../images/jang3.jpg"></div>
+	<div class = "guess_box"><img src = "../images/jang4.jpg"></div>
+</div>
+</div>
+</body>
+</html>
