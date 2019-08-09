@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
+<!-- <link rel = "stylesheet" href = "../css/mystyle.css"> -->
+<style>
+	* {
+	
+		font-family: 'Sunflower', sans-serif;
+	}
+	hr {
+		border : 2px solid blue;
+		width : 230px;
+		
+	}
+	div {
+		width : 220px;
+		margin-right : 10px;
+		float : right;
+	}
+</style>
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		xhr = new XMLHttpRequest();
+		$('#btn1').click(function(){
+			xhr.open("GET", '/jqpro/LprodSelect',true);
+			xhr.send();
+			xhr.onreadystatechange = function(){
+				if(this.readyState==4&&this.status==200){
+					datas = JSON.parse(this.responseText);
+						code = "<div>";
+					$.each(datas, function(i){
+						code += "<br>";
+						code += "<div>Lprod_id : "+ datas[i].Lprod_id +"</div>";
+						code += "<div> Lprod_gu : "+ datas[i].Lprod_gu +"<div>";
+						code += "<div> Lprod_nm : "+ datas[i].Lprod_nm +"<div>";
+						code += "<hr>"
+					})
+						code += "</div>"
+					$('#result1').html(code);
+
+				}
+			}
+			
+		})
+		
+	})
+	
+</script>	
+</head>
+<body>
+	<div class = "box">
+	
+		<button type = "button" id = "btn1">실행</button>
+		<br>
+		<div id = "result1"></div>
+	</div>
+</body>
+</html>

@@ -7,7 +7,7 @@
 	DB와 연결하는 정보를 properties파일에 설정해 놓고 
 	이 properties파일을 읽어와 DB와 연결작업을 수행한다.
 	 -->
-	 <properties resource="kr/or/ddit/ibatis/sqlMapConfig.properties"/>
+	 <properties resource="kr/or/ddit/ibatis/config/sqlMapConfig.properties"/>
 	 
 	 <!-- 
 	 	maxRequests >= maxSessions >= maxTransactions
@@ -27,6 +27,9 @@
 	 -->
 <!-- 	 <typeAlias alias="memVO" type="basic.MemberVO"/> -->
 	<typeAlias alias="memVo" type="kr.or.ddit.member.vo.MemberVO"/>
+	<typeAlias alias="LProdVO" type="kr.or.ddit.lprod.vo.LProdVO"/>
+	<typeAlias alias="BuyerVO" type="kr.or.ddit.buyer.vo.BuyerVO"/>
+	
 	
 	 
 	 <!-- DB에 연결을 설정하는 부분 
@@ -45,6 +48,8 @@
 	 <!-- 형식) <sqlMap resource="경로명/파일명.xml"/>     -->
 <!-- 	 <sqlMap resource="basic/member.xml"/> -->
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/member.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapper/lprod.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapper/buyer.xml"/>
 
 </sqlMapConfig>	
 

@@ -3,14 +3,12 @@ package kr.or.ddit.member.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
@@ -42,8 +40,14 @@ public class MemberSelect extends HttpServlet {
     	//service를 가져온다. 
     	IMemberService service = MemberServiceImpl.getInstance();
     	
-    	List<MemberVO> list = service.selectAll();
+    	List<MemberVO> list;
+		
+			list = service.selectAll();
+		
     	
+    	//service에서 수행한 결과값을 value에 준다. key는 memberlist.jsp에서 사용
+    	request.setAttribute("list", list);
+	
     	//db에 있는 파일을 jason 파일로 가져온다. 
     	//crud의 결과 list를 view 페이지로 보내야 한다. 
     	//보내는 방법  : redirect(페이지가 넘어갈때 데이터도 같이 넘겨 값이 사라진다), forward(페이지가 넘어갈때 데이터를 가지고 있어 데이터의 재사용이 가능)
@@ -52,10 +56,6 @@ public class MemberSelect extends HttpServlet {
     	//view 페이지에서 response와 request를 재 생산한다.
     	
     	//결과값 list를 request에 저장 후 forward 시킨다. 
-    	
-    	RequestDispatcher disp = request.getRequestDispatcher("0809/memberList.jsp");
-    	disp.forward(request, response);
-    	
+    	request.getRequestDispatcher("/0809/memberList.jsp").forward(request, response);
 	}
-
 }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<script src = "../js/jquery-3.4.1.min.js"></script>
+<style>
+	* {
+	
+		font-family: 'Sunflower', sans-serif;
+	}
+	hr {
+		border : 2px solid blue;
+		width : 230px;
+		
+	}
+	div {
+		width : 220px;
+		margin-right : 10px;
+		float : right;
+	}
+</style>
+<script>
+	$(function(){
+		//btn1을 클릭하면 controller로 이동
+		xhr = new XMLHttpRequest();
+		$('#btn1').on('click', function(){
+			//요청 (방식, servlet 주소(+localhost까지 포함), )
+			xhr.open("GET", '/jqpro/MemberSelect', true);
+			
+			xhr.send();
+			//응답
+			xhr.onreadystatechange = function(){
+				if(this.readyState==4 && this.status==200){
+					datas = JSON.parse(this.responseText); 
+					code ="<table border = '1'>";
+					code += "<tr><td>이름</td><td>아이디</td><td>이메일</td>";
+					code += "<td>주소</td><td>우편번호</td><td>전화번호</td><td>생일</td></tr>";
+					$.each(datas, function(i){
+						
+						code += "<tr>";
+						code += "<td>"+ datas[i].name + "</td>";
+						code += "<td>" + datas[i].id + "</td>";
+						code += "<td>" + datas[i].addr + "</td>";
+						code += "<td>" +datas[i].zip + "</td>";
+						code += "<td>" +datas[i].hp + "</td>";
+						code += "<td>" +datas[i].mail+ "</td>";
+						code += "<td>" +datas[i].bir+ "</td>";
+						code += "</tr>";
+					})
+					code += "</table>";
+					$('#result1').html(code);
+				}
+			}
+		})
+	})
+	
+</script>	
+</head>
+<body>
+	<div class = "box">
+		
+		<button id = "btn1" type = "button">멤버리스트</button>
+		<br>
+		<div id = "result1"></div>
+		
+	</div>
+</body>
+</html>
