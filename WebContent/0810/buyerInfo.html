@@ -4,80 +4,56 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel = "stylesheet" href = "../css/mystyle.css">
-<script src = "../js/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="../css/mystyle.css">
+<script src="../js/jquery-3.4.1.min.js"></script>
 
 <script>
 	$(function(){
-		
-	})
+		xhr = new XMLHttpRequest();
+		$.ajax({
+			url : '/jqpro/BuyerSelect',
+			dataType : 'json',
+			success : function(datas){
+				code = "<table border = '1'>";
+				code += "<tr><td>거래처 정보</td><td>거래처 상세 정보</td></tr>";
+				$.each(datas, function(i){
+					code += "<tr>";
+					code += "<td class = 'name'>" + datas[i].Buyer_Name + "</td>";
+				})
+					code += "<td id = 'div' rowspan = 14></td>";
+					code += "</tr>"
+				code += "</table>";
+				$('body').html(code);
 	
-</script>	
+					$('.name').click(function(){
+						code = "<table border = '1'>";
+						comp = $(this).text();
+					  $.each(datas, function(i){
+						  if(comp==datas[i].Buyer_Name) {
+						code += "<tr><td>Buyer_id</td><td>" + datas[i].Buyer_id + "</td></tr>"; 
+						code += "<tr><td>Buyer_Name</td><td>" + datas[i].Buyer_Name + "</td></tr>"; 
+						code += "<tr><td>Buyer_Bank</td><td>" + datas[i].Buyer_Bank + "</td></tr>"; 
+						code += "<tr><td>Buyer_BankNo</td><td>" + datas[i].Buyer_BankNo + "</td></tr>"; 
+						code += "<tr><td>Buyer_BankName</td><td>" + datas[i].Buyer_BankName + "</td></tr>"; 
+						code += "<tr><td>Buyer_Zip</td><td>" + datas[i].Buyer_Zip + "</td></tr>"; 
+						code += "<tr><td>Buyer_Addr</td><td>" + datas[i].Buyer_Addr + "</td></tr>"; 
+						code += "<tr><td>Buyer_ConTel</td><td>" + datas[i].Buyer_ConTel + "</td></tr>"; 
+						code += "<tr><td>Buyer_Fax</td><td>" + datas[i].Buyer_Fax + "</td></tr>"; 
+						code += "<tr><td>Buyer_Mail</td><td>" + datas[i].Buyer_Mail + "</td></tr>"; 
+						code += "<tr><td>Buyer_Changer</td><td>" + datas[i].Buyer_Changer + "</td></tr>"; 
+						code += "<tr><td>Buyer_Telex</td><td>" + datas[i].Buyer_Telex + "</td></tr>"; 
+					  }
+						})	
+				code += "</table>";
+				$('#div').html(code);
+					})
+			}
+			})
+		
+		})
+</script>
 </head>
 <body>
-
-<table border ="1">
-	<tr>
-		<td>거래처 이름</td>
-		<td>거래처상세정보</td>
-	</tr>	
-	
-	<tr>
-		<td>삼성컴퓨터</td>
-		<td id = "result1" colspan="13"></td>
-	</tr>
-	
-	<tr>
-		<td>삼보컴퓨터</td>
-	</tr>
-	
-	<tr>
-		<td>현주컴퓨터</td>
-	</tr>
-	
-	<tr>
-		<td>대우전자</td>
-	</tr>
-	
-	<tr>
-		<td>삼성전자</td>
-	</tr>
-	
-	<tr>
-		<td>대현</td>
-	</tr>
-	
-	<tr>
-		<td>마르죠</td>
-	</tr>
-	
-	<tr>
-		<td>LG패션</td>
-	</tr>
-	
-	<tr>
-		<td>캠프리지</td>
-	</tr>
-	
-	<tr>
-		<td>카파치</td>
-	</tr>
-	
-	<tr>
-		<td>한국화장품</td>
-	</tr>
-	
-	<tr>
-		<td>피리어스</td>
-	</tr>
-	
-	<tr>
-		<td>참존</td>
-	</tr>
-		
-</table>
-
-
 
 </body>
 </html>

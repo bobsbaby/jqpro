@@ -5,9 +5,8 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 	
 <sqlMap namespace="buyer" >
-	<select id = "selectId" parameterClass="String" resultClass="BuyerVO">
+	<select id = "selectId" resultClass="BuyerVO">
 		select * 
 		  from buyer 
-		 where buyer_name = #buyer_name# 
 	</select>
 </sqlMap>	

@@ -1,11 +1,13 @@
 package kr.or.ddit.buyer.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
 import kr.or.ddit.buyer.vo.BuyerVO;
 import kr.or.ddit.ibatis.config.SqlMapClientFactory;
+
 
 public class BuyerDaoImpl implements IBuyerDao {
 	private SqlMapClient client;
@@ -21,13 +23,11 @@ public class BuyerDaoImpl implements IBuyerDao {
 		}
 		return dao;
 	}
-	
+
 	@Override
-	public BuyerVO getInfo(String bName) throws SQLException {
-		BuyerVO buyerVO = null;
-		buyerVO = (BuyerVO) client.queryForObject("buyer.selectId", bName);
-		
-		return buyerVO;
+	public List<BuyerVO> getInfo() throws SQLException {
+	
+		return client.queryForList("buyer.selectId");
 	}
 
 }

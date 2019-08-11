@@ -4,11 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.sun.security.ntlm.Client;
 
 import kr.or.ddit.ibatis.config.SqlMapClientFactory;
 import kr.or.ddit.member.vo.MemberVO;
-import sun.security.jca.GetInstance;
 
 /*
  	Mapper에 접근하기 위해서 SqlMapClient 객체가 필요 - 직접 생성하지 않고 생성되어있는 클래스에서 getter를 이용하여 가져온다. 
