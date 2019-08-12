@@ -29,8 +29,7 @@
 	<typeAlias alias="memVo" type="kr.or.ddit.member.vo.MemberVO"/>
 	<typeAlias alias="LProdVO" type="kr.or.ddit.lprod.vo.LProdVO"/>
 	<typeAlias alias="BuyerVO" type="kr.or.ddit.buyer.vo.BuyerVO"/>
-	
-	
+	<typeAlias alias="prodVO" type="kr.or.ddit.prod.vo.ProdVO"/>
 	 
 	 <!-- DB에 연결을 설정하는 부분 
 	 	(위에서 읽어온 properties파일 정보를 이용하여 설정한다.) -->
@@ -50,6 +49,7 @@
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/member.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/lprod.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/buyer.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapper/prod.xml"/>
 
 </sqlMapConfig>	
 

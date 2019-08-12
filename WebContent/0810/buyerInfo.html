@@ -1,59 +1,95 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 
-<link rel="stylesheet" href="../css/mystyle.css">
-<script src="../js/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" href="../css/mystyle.css">
 
-<script>
-	$(function(){
-		xhr = new XMLHttpRequest();
-		$.ajax({
-			url : '/jqpro/BuyerSelect',
-			dataType : 'json',
-			success : function(datas){
-				code = "<table border = '1'>";
-				code += "<tr><td>거래처 정보</td><td>거래처 상세 정보</td></tr>";
-				$.each(datas, function(i){
-					code += "<tr>";
-					code += "<td class = 'name'>" + datas[i].Buyer_Name + "</td>";
-				})
-					code += "<td id = 'div' rowspan = 14></td>";
-					code += "</tr>"
-				code += "</table>";
-				$('body').html(code);
-	
-					$('.name').click(function(){
-						code = "<table border = '1'>";
-						comp = $(this).text();
-					  $.each(datas, function(i){
-						  if(comp==datas[i].Buyer_Name) {
-						code += "<tr><td>Buyer_id</td><td>" + datas[i].Buyer_id + "</td></tr>"; 
-						code += "<tr><td>Buyer_Name</td><td>" + datas[i].Buyer_Name + "</td></tr>"; 
-						code += "<tr><td>Buyer_Bank</td><td>" + datas[i].Buyer_Bank + "</td></tr>"; 
-						code += "<tr><td>Buyer_BankNo</td><td>" + datas[i].Buyer_BankNo + "</td></tr>"; 
-						code += "<tr><td>Buyer_BankName</td><td>" + datas[i].Buyer_BankName + "</td></tr>"; 
-						code += "<tr><td>Buyer_Zip</td><td>" + datas[i].Buyer_Zip + "</td></tr>"; 
-						code += "<tr><td>Buyer_Addr</td><td>" + datas[i].Buyer_Addr + "</td></tr>"; 
-						code += "<tr><td>Buyer_ConTel</td><td>" + datas[i].Buyer_ConTel + "</td></tr>"; 
-						code += "<tr><td>Buyer_Fax</td><td>" + datas[i].Buyer_Fax + "</td></tr>"; 
-						code += "<tr><td>Buyer_Mail</td><td>" + datas[i].Buyer_Mail + "</td></tr>"; 
-						code += "<tr><td>Buyer_Changer</td><td>" + datas[i].Buyer_Changer + "</td></tr>"; 
-						code += "<tr><td>Buyer_Telex</td><td>" + datas[i].Buyer_Telex + "</td></tr>"; 
-					  }
-						})	
-				code += "</table>";
-				$('#div').html(code);
-					})
-			}
-			})
+	<style>
+		#entire {
+			width: 800px;
+			height: 500px;
+			border: 2px solid black;
+			border-collapse: collapse;
+			text-align: center;
+			margin: center;
+		}
 		
+		#detail {
+			border-collapse: collapse;
+			width : 600px;
+			height : 450px
+		}
+
+		.name {
+			width: 200px;
+			border: 1px solid black;
+		}
+
+		.name:active {
+			border: 10px solid #f58282;
+			font-weight : bold;
+			font-size : 1.2em;
+		}
+
+	</style>
+
+	<script src="../js/jquery-3.4.1.min.js"></script>
+
+	<script>
+		$(function () {
+			var xhr = new XMLHttpRequest();
+			$.ajax({
+				url: '/jqpro/BuyerSelect',
+				dataType: 'json',
+				success: function (data) {
+					var code = "<table id = 'entire' border = '1'>";
+					code += "<tr><td>거래처 정보</td><td>거래처 상세 정보</td></tr>";
+					$.each(data, function (i) {
+						code += "<tr>";
+						code += "<td class = 'name'>" + data[i].Buyer_Name + "</td>";
+						if (i === 0) {
+							code += "<td id = 'div' rowspan = " + data.length + ">";
+							code += "<table id = 'detail' border = '1'></table>";
+							code += "</td>";
+						}
+						code += "</tr>"
+					})
+					code += "</table>";
+
+					$('body').html(code);
+
+					$('.name').hover(function () {
+						$(this).css('background', '#ff98a3');
+					}, function () {
+						$(this).css('background', 'none');
+					})
+
+					$('.name').click(function () {
+						var comp = $(this).text();
+						$.each(data, function (i) {
+							if (comp == data[i].Buyer_Name) {
+								$('#div').html("");
+								var res = "";
+								$.each(data[i], function (i, j) {
+									res += "<tr><td>" + i + "</td>";
+									res += "<td>" + j + "</td></tr>";
+									$('#div').html(res);
+								})
+							}
+						})
+					})
+				}
+			})
+
 		})
-</script>
+	</script>
 </head>
+
 <body>
 
 </body>
+
 </html>

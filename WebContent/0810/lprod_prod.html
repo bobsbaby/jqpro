@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.4.1.min.js"></script>
+
+<link rel="stylesheet" href="../css/mystyle.css">
+
+<script>
+ $(function(){
+	 
+
+	 $('button').click(function(){
+		/*  $.ajax({
+			 url : 'jqpro/LProdList',
+			 type : 'get',
+			 dataType : 'json',
+			 success : function(res){
+				 
+			 },
+			 error : function(xhr){
+				 
+			 }
+		 }) */
+		 
+		 $.getJSON(
+				 '/jqpro/LprodSelect',
+				 function(res){
+					code = "";
+					$.each(res, function(i){
+						code += "<option value='" +  res[i].Lprod_gu + "'>" + res[i].Lprod_nm + "</option>" 
+					})
+					$('#lprod').html(code);
+					
+				 }
+		 )
+		 
+	 })
+	 
+	 $('#lprod').on('change', function(){
+		
+		 //option의 value값을 가져온다 
+		 lprodGu =    $(this).val();
+		 
+		 //서버로 전송
+		/*  $.ajax({
+			 url : '/jqpro/ProdServlet',
+			 type : 'get',
+			 data : {'lprod_gu' : lprodGu },
+			 dataType : 'json',
+			 success : function(res){
+				 code = "";
+					$.each(res,function(i){
+						
+						code += "<option value='"+ res[i].id  +"'>" +res[i].name + "</option>";
+	 				})
+	 				
+	 				$('#prod').html(code); 
+			 },
+			 error :function(xhr){
+				 alert("상태 " + xhr.staus);
+			 }
+			 
+		 }) */
+		  $.get(
+			 '/jqpro/ProdServlet',
+			 {'lprod_gu' : lprodGu},
+			 function(res){
+				code = "";
+				$.each(res,function(i){
+					
+					code += "<option value='"+ res[i].id  +"'>" +res[i].name + "</option>";
+ 				})
+ 				
+ 				$('#prod').html(code);
+			 },
+			 'json'
+		 ) 
+			 
+	 })
+ })
+	 $('#prod').on('change', function(){
+		 prodId =   $(this).val();
+		 
+		 //서버로전송 
+		 $.post(
+				 '/jqpro/ProdServlet',	 
+				 { "prod_id" : prodId },
+				 function(res){
+					code = "<table border='1'>" ;
+					code += "<tr><td>항목</td><td>내용</td></tr>";
+					code += "<tr><td>PROD_ID</td><td>" + res.id  +"</td></tr>";
+					code += "<tr><td>PROD_NAME</td><td>" + res.name  +"</td></tr>";
+					code += "<tr><td>PROD_LGU</td><td>" + res.lgu  +"</td></tr>";
+					code += "<tr><td>PROD_SALE</td><td>" + res.sale  +"</td></tr>";
+					code += "<tr><td>PROD_PRICE</td><td>" + res.price  +"</td></tr>";
+					code += "<tr><td>PROD_DETAIL</td><td>" + res.detail  +"</td></tr>";
+				    code += "</table>";
+				 
+				    $('#detail').html(code);
+				    
+				 },
+				 'json'
+		 )
+		 
+	 })
+
+</script>
+<style>
+ table {
+    border-collapse:   collapse;
+   
+ }
+ td {
+   width : 250px;
+   height : 40px;
+   text-align: center;
+ }
+</style>
+</head>
+<body>
+<button type = "button">실행</button>
+	<br><br>
+  <table border="1">
+    <tr>
+      <td>
+         <select name="lprod" id="lprod">
+         </select>
+      </td>
+      <td>
+        <select name="prod" id="prod">
+        </select>
+      </td>
+    <tr>
+    
+    <tr>
+      <td colspan="2">
+        <div id="detail"></div>
+      </td>
+    </tr>
+    
+  </table>
+
+
+
+
+
+</body>
+</html>

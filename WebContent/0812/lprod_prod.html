@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel = "stylesheet" href = "../css/mystyle.css">
+<style>
+	table {
+		border-collapse : collapse;
+		width : 800px;
+	}
+
+	td {
+		width : 200px;
+		height : 40px;
+		text-align : center;
+		
+	}
+</style>
+<script src = "../js/jquery-3.4.1.min.js"></script>
+
+<script>
+	$(function(){
+		$('button').click(function(){
+// 			$.ajax({ 순서 바뀌어도 상관 없음
+// 				url : '/jqpro/LprodSelect',
+// 				type : 'get',
+// 				dataType : 'json',
+// 				success : function(res){
+					
+// 				},
+// 				error : function(xhr){
+					
+// 				}
+// 			})
+		$.getJSON( //url, data, success key값 없이 value값만 올 수 있다. 순서가 바뀌면 안 된다. 하지만 없으면 생략해줘도 된다. 
+			  '/jqpro/LprodSelect',
+			   function(res){
+				code = "";
+				$.each(res,function(i){
+					code += "<option value = '"+ res[i].Lprod_gu + "'>"+ res[i].Lprod_nm + "</option>";
+				})
+				$('#lprod').html(code);
+			}
+		)			
+		})
+		
+// 		$('#lprod').on('change',function(){
+// 			//option의 value 값을 가져온다. 
+// 			lprodGu = $(this).val();
+// 			//서버로 전송한다. 
+// 			$.get(
+// 				'/jqpro/ProdServlet',
+// 				{'lprod_gu' : lprodGu},
+// 				//'lprod_gu' servlet에서 request.getParameter로 받는 이름과 일치해야함
+// 				//lprodGu -> lprodGu = $(this).val();의 변수명과 동일해야 한다. (넘어갈 값)
+// 				function(res){
+// 					code = "";
+// 					$.each(res,function(i){
+// 						code += "<option value = '"+ res[i].id + "'>" + res[i].name + "</option>";
+// 						//res[i].id ,  res[i].name  json 파일에서 지정한 key값과 동일해야함 
+// 					})
+// 					$('prod').html(code);
+// 				},
+// 				'json'
+// 			)
+// 		})
+			$('#lprod').on('change', function () {
+            
+            // option의 value값을 가져온다.
+            lprodGu = $(this).val();
+            
+            // 서버로 전송
+            $.get(
+               '/jqpro/ProdServlet',
+               {'lprod_gu' : lprodGu},
+               function (res) {
+                  code = "";
+                  $.each(res, function (i) {
+                     code += "<option value='" + res[i].id + "'>" + res[i].name + "</option>"
+                  })
+                  
+                  $('#prod').html(code);
+               },
+               'json'
+            )
+         })
+         
+         $('#prod').on('change',function(){
+        	 prodId = $(this).val();
+        	 //서버로 전송한다. 
+        	 $.post(
+        		'/jqpro/ProdServlet',
+        		{'prod_id' :prodId },
+        		function(res){
+        			code = "<table border = '1'>";
+        			code += "<tr><td>항목</td><td>내용</td></tr>"
+        			code += "<tr><td>prodid</td><td>" +res.id+ "</td></tr>";
+        			code += "<tr><td>prodname</td><td>" +res.name+ "</td></tr>";
+        			code += "<tr><td>prodlgu</td><td>" +res.lgu+ "</td></tr>";
+        			code += "<tr><td>prodsale</td><td>" +res.sale+ "</td></tr>";
+        			code += "<tr><td>prodprice</td><td>" +res.price+ "</td></tr>";
+        			code += "<tr><td>prodoutline</td><td>" +res.outline+ "</td></tr>";
+        			code += "<tr><td>proddetail</td><td>" +res.detail+ "</td></tr>";
+        			code += "</table>"
+        			$('#detail').html(code);
+        		},
+        		'json'
+        	 )
+        	 
+         })
+		
+	})
+</script>	
+</head>
+
+
+<body>
+
+	<button type = "button">실행</button>
+	<br><br>
+	<table border = "1">
+		<tr>
+			<td>
+				<select name = "lprod" id = "lprod">
+				</select>
+			</td>
+			<td>
+				<select name = "prod" id = "prod">
+					
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2">
+			<div id = "detail"></div>
+			</td>
+		</tr>	
+	</table>
+</body>
+</html>
