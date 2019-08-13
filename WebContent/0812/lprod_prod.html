@@ -3,37 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link rel = "stylesheet" href = "../css/mystyle.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style>
-	table {
-		border-collapse : collapse;
-		width : 800px;
-	}
+table {
+	border-collapse: collapse;
+	width: 500px;
+}
+button {
+	margin-top : 20px;
 
-	td {
-		width : 200px;
-		height : 40px;
-		text-align : center;
-		
-	}
+}
+select {
+	margin-bottom: 10px;
+	border-radius: 10px;
+	background-color : #2A3F54;
+	color : white;
+	height : 30px;
+	width : 300px;
+}
+
+select:active{
+	font-size : 1.5em;
+}
+
+label {
+	width : 150px;
+	text-align : center;
+}
+
+td {
+	width: 100px;
+	height: 40px;
+	text-align: center;
+}
+
+body {
+	background: #eeebe7;
+	padding: 100px 20px;
+	text-align: center;
+}
+
+
 </style>
-<script src = "../js/jquery-3.4.1.min.js"></script>
+<script src="../js/jquery-3.4.1.min.js"></script>
 
 <script>
 	$(function(){
 		$('button').click(function(){
-// 			$.ajax({ 순서 바뀌어도 상관 없음
-// 				url : '/jqpro/LprodSelect',
-// 				type : 'get',
-// 				dataType : 'json',
-// 				success : function(res){
-					
-// 				},
-// 				error : function(xhr){
-					
-// 				}
-// 			})
+
 		$.getJSON( //url, data, success key값 없이 value값만 올 수 있다. 순서가 바뀌면 안 된다. 하지만 없으면 생략해줘도 된다. 
 			  '/jqpro/LprodSelect',
 			   function(res){
@@ -42,30 +65,12 @@
 					code += "<option value = '"+ res[i].Lprod_gu + "'>"+ res[i].Lprod_nm + "</option>";
 				})
 				$('#lprod').html(code);
+				$('#lprod').trigger('change');
+				//lprod의 change 이벤트로 간다. 
 			}
 		)			
 		})
 		
-// 		$('#lprod').on('change',function(){
-// 			//option의 value 값을 가져온다. 
-// 			lprodGu = $(this).val();
-// 			//서버로 전송한다. 
-// 			$.get(
-// 				'/jqpro/ProdServlet',
-// 				{'lprod_gu' : lprodGu},
-// 				//'lprod_gu' servlet에서 request.getParameter로 받는 이름과 일치해야함
-// 				//lprodGu -> lprodGu = $(this).val();의 변수명과 동일해야 한다. (넘어갈 값)
-// 				function(res){
-// 					code = "";
-// 					$.each(res,function(i){
-// 						code += "<option value = '"+ res[i].id + "'>" + res[i].name + "</option>";
-// 						//res[i].id ,  res[i].name  json 파일에서 지정한 key값과 동일해야함 
-// 					})
-// 					$('prod').html(code);
-// 				},
-// 				'json'
-// 			)
-// 		})
 			$('#lprod').on('change', function () {
             
             // option의 value값을 가져온다.
@@ -77,11 +82,23 @@
                {'lprod_gu' : lprodGu},
                function (res) {
                   code = "";
-                  $.each(res, function (i) {
-                     code += "<option value='" + res[i].id + "'>" + res[i].name + "</option>"
+                  if(res.sw=="OK"){
+                  $.each(res.data, function (i, v) {
+                     code += "<option value='" + v.id + "'>" + v.name + "</option>"
                   })
+                  }else {
+						code += "<option value='0'>데이터 없음</option>";
+						noimg = $('<img>', {
+							'src' : '../images/noImage.png',
+							'width' : '200px',
+							'height' : '200px'
+						});
+						$('#detail').empty().append(noimg);
+				}
                   
                   $('#prod').html(code);
+                  $('#prod').trigger('change');
+                  //trigger에서 연속선상에 있는 모든 이벤트가 동시에 진행된다. 
                },
                'json'
             )
@@ -92,9 +109,9 @@
         	 //서버로 전송한다. 
         	 $.post(
         		'/jqpro/ProdServlet',
-        		{'prod_id' :prodId },
+        		{'prod_id' : prodId },
         		function(res){
-        			code = "<table border = '1'>";
+        			code = "<table class='table table-hover' border = '1'>";
         			code += "<tr><td>항목</td><td>내용</td></tr>"
         			code += "<tr><td>prodid</td><td>" +res.id+ "</td></tr>";
         			code += "<tr><td>prodname</td><td>" +res.name+ "</td></tr>";
@@ -108,25 +125,54 @@
         		},
         		'json'
         	 )
-        	 
          })
-		
 	})
-</script>	
+</script>
 </head>
 
 
 <body>
 
-	<button type = "button">실행</button>
+	<div class="container">
+<button type = "button"class="btn btn-primary">실행</button>
+<br><br>
+		<h2>제품리스트</h2>
+		<p>The form below contains two dropdown menus (select lists):</p>
+		<form>
+			<div class="form-group">
+				<label for="lprod">제품 목록 리스트</label> <select
+					class="selectpicker" id="lprod">
+					
+				</select> <br>
+			</div>
+		</form>
+		
+		<form>
+			<div class="form-group">
+				<label for="prod">상품 리스트</label> <select class="selectpicker" id="prod">
+				
+				</select> <br>
+			</div>
+		</form>
+	</div>
+	
 	<br><br>
+	<div id = "detail"></div>
+
+	<!--  
+	<button type = "button"class="btn btn-primary>실행</button>
+	<br><br>
+	<h2>제품리스트</h2>
 	<table border = "1">
 		<tr>
 			<td>
+				<h3>제품분류</h3>
 				<select name = "lprod" id = "lprod">
 				</select>
+				<br>
 			</td>
 			<td>
+				<h3>상품리스트</h3>
 				<select name = "prod" id = "prod">
 					
 				</select>
@@ -139,5 +185,6 @@
 			</td>
 		</tr>	
 	</table>
+	-->
 </body>
 </html>

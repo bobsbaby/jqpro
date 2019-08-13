@@ -43,10 +43,14 @@ public class ProdServlet extends HttpServlet {
 		
 		List<ProdVO>  list = service.selectProdNames(lpgu);
 		
+		//데이터가 있는 경우 p101
+		//데이터가 없는 경우 p402
 		request.setAttribute("list", list);
 		
+//		RequestDispatcher  disp = 
+//				request.getRequestDispatcher("0812/prodNames.jsp");
 		RequestDispatcher  disp = 
-				request.getRequestDispatcher("0812/prodNames.jsp");
+				request.getRequestDispatcher("0812/prod.jsp");
 		
 		disp.forward(request, response);
 		
@@ -60,8 +64,11 @@ public class ProdServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		//prod의 oprion value에서 값을 가져온다. 
 		String  prid =  request.getParameter("prod_id");
+		//데이터 없음인 경우에는 prid의 값이 0이다. 
+		
+		
 		
 		IProdService  service  = ProdServiceImpl.getInstance();
 		
