@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel = "stylesheet" href = "../css/board.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src = "../js/board.js"></script>
@@ -17,14 +18,49 @@
   </style>
 <title>Insert title here</title>
 <script>
+	//전역변수로 만들어서 board.js에서 사용할 수 있도록 한다
+	reply = {};
 	$(function(){
+		
 		readServer();
+		
+		//myModal이 감춰질때 이 클래스에 있는 내용을 지워라 
+		$('.modal').on('hidden.bs.modal', function(){
+			$('.text', this).val("");
+		})
+		//버튼의 class == action -> 수정, 삭제,댓글 등록 
+		//delegate 방식으로 -> body tag에 미리 만들어 놓은 것이 아니라 실행 후 나중에 만들어 진 것이므로  bind 방식이 아니라 delegate 방식으로 해야 한다. 
+		//
+		$('#accordionList').on('click','.action',function(){
+			bname = $(this).attr('name');
+			bidx = $(this).attr('idx');
+			if(bname == "delete"){
+				deleteServer(bidx);
+			}else if(bname == "modify"){
+				
+			}else if (bname == "reply"){
+				//[] -> 배열      {} --> 객체(동적으로 필드나 메서드를 추가할 수 있다.)
+				
+				//댓글 등록, 입력한 내용을 가져온다. (자식찾기 content, find, childred)->parent.find('.area').val
+				text = $(this).parent().find('.area').val();
+				name = "korea";
+				reply.name = name;
+				reply.cont = text;
+				reply.bonum = bidx;
+				
+				//this는 누른 등록버튼 this를 기준으로 하기 위하여 this를 넘겨줌 
+				replySaveServer();
+				ReplyListServer(bidx, this);
+				
+			}
+		})
 		
 		$('#w_submit').on('click', function(){
 			writeServer();
-			
 		})
+
 	})
+	
 </script>
 </head>
 <body>

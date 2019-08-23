@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import kr.or.ddit.member.service.IMemberService;
 import kr.or.ddit.member.service.MemberServiceImpl;
 import kr.or.ddit.member.vo.MemberVO;
@@ -30,6 +32,7 @@ public class InsertMember extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		//입력한 모든 값을 가져온다. 
+		
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String bir = request.getParameter("bir");
@@ -51,6 +54,11 @@ public class InsertMember extends HttpServlet {
 		vo.setMem_zip(zip);
 		vo.setMem_add1(add1);
 		vo.setMem_add2(add2);
+		
+		//위 내용을 beanutils를 이용하여 함축하기 
+		MemberVO memVo = new MemberVO();
+		
+		//BeanUtils.populate(memVo, request.getParameterMap());
 		
 		//service 객체 얻기 
 		IMemberService service = MemberServiceImpl.getInstance();

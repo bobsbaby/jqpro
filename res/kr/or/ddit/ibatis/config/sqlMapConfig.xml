@@ -31,6 +31,8 @@
 	<typeAlias alias="LProdVO" type="kr.or.ddit.lprod.vo.LProdVO"/>
 	<typeAlias alias="BuyerVO" type="kr.or.ddit.buyer.vo.BuyerVO"/>
 	<typeAlias alias="prodVO" type="kr.or.ddit.prod.vo.ProdVO"/>
+	<typeAlias alias="boardVO" type="kr.or.ddit.board.vo.BoardVO"/>
+	<typeAlias alias="replyVO" type="kr.or.ddit.board.vo.ReplyVo"/>
 	
 	 
 	 <!-- DB에 연결을 설정하는 부분 

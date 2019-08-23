@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.rep {
+	
+	height : auto;
+	background: fuchsia;
+	border: 1px solid lime;
+	margin-top: 2px;
+	
+}
