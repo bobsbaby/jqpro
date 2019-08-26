@@ -12,7 +12,7 @@
 		"renum" : "<%=vo.getRenum() %>",
 		"bonum" : "<%=vo.getBonum() %>",
 		"name" : "<%=vo.getName() %>",
-		"cont" : "<%=vo.getCont() %>",
+		"cont" : "<%=vo.getCont().replaceAll("\r", "").replaceAll("\n", "<br>") %>",
 		"redate" : "<%=vo.getRedate() %>"	
 	}
 

@@ -24,7 +24,7 @@
  </delete>
  
  <insert id = "insertReply" parameterClass="replyVO">
- 	insert into reply valus(reply_seq.nextval, #bonum#, #name#, #cont#, sysdate)
+ 	insert into reply values(reply_seq.nextval, #bonum#, #name#, #cont#, sysdate)
  	
  	<selectKey keyProperty="renum" resultClass="int">
  		select reply_seq.currval from dual
@@ -34,5 +34,19 @@
  <select id = "listReply" parameterClass="int" resultClass="replyVO">
  	select * from reply where bonum = #data#
  </select>
+ 
+ <!-- 댓글 삭제 -->
+ 
+ <delete id = "deleteReply" parameterClass="int">
+ 	delete from reply
+ 	 where renum = #data#
+ </delete>
+ 
+ <!-- 댓글 수정 -->
+ <update id="modifyReply" parameterClass="map">
+ 	update reply 
+ 	   set cont = #cont#
+ 	 where renum = #renum#
+ </update>
  
 </sqlMap>	

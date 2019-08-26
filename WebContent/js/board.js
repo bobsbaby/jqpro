@@ -1,13 +1,51 @@
 /**
+
  * 
  */
+
+var replyUpdateServer = function() {
+	$.ajax({
+		url : '/jqpro/ReplyUpdate',
+		type : 'post',
+		data : reply,
+		dataType : 'json',
+		success : function(datas){
+			alert(datas.sw);
+			readServer();
+		},
+		error : function(xhr){
+			alert(xhr.status);
+		}
+	})
+}
+
+
+var replyDeleteServer = function(renum, but){
+	$.ajax({
+		url : '/jqpro/ReplyDelete',
+		data : {'renum' : renum},
+		dataType : 'json',
+		success : function(datas){
+			//readServer();
+			$(but).parents('.rep').remove();
+			$(but).parents('.rep').parents('.panel').find('.area').empty();
+		},
+		error : function(xhr){
+			alert(xhr.status);
+		}
+	})
+}
+
+
 var ReplyListServer = function(seq, but){
+	//but는 등록버튼임당F
 	$.ajax({
 		url : '/jqpro/ReplyList',
 		type : 'get',
 		data : {'seq' : seq},
 		dataType : 'json',
 		success : function(datas){
+			$(but).parents('.panel').find('.pbody').find('.rep').remove();
 			code = "";
 			$.each(datas, function(i, v){
 				code += '   <div class="panel-body rep">';
@@ -15,13 +53,16 @@ var ReplyListServer = function(seq, but){
 				code += '			<span>'+v.name+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 				code += '' +v.redate +'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 				code += '</span><br><br>';
-				code += '<span class = "cont">'+v.cont+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
+				code += '<span class = "cont">'+v.cont+'</span>';
 				code += '   	</p>';
 				code += '   	<p style = "float : right;">';
 				code += '   		<button idx = "'+v.renum+'" type = "button" name = "r_modify" class = "action">댓글수정</button>';
 				code += '   		<button idx = "'+v.renum+'" type = "button" name = "r_delete" class = "action">댓글삭제</button>';
 				code += '</p></div>';
 			})
+			$(but).parents('.panel').find('.pbody').append(code);
+			
+			//append는 계속 추가되는 문제가 있어 remove를 해 줘야 한다. 
 		},
 		error : function(xhr){
 			alert(xhr.status);
@@ -35,10 +76,10 @@ var replySaveServer = function(but){
 		url : '/jqpro/ReplySave',
 		type : 'post',
 		data : reply,	//reply 객체를 보내준다. 
+		async : false,	//동기처리로 변환 
 		dataType : 'json',
 		success : function(datas){
-			//
-			alert(datas.res);
+			//alert(datas.res);+
 			
 		},
 		error : function(xhr){
@@ -92,11 +133,13 @@ var readServer = function(){
 		type : 'get',
 		dataType : 'json',
 		success : function(datas){
-			code = '<div class="panel panel-default" id = "parent">';
+			code = '<div class="panel-group" id="parent">';
+			
 			$.each(datas, function(i, v){
+				code += '<div class="panel panel-default">' ;
 				code += ' <div class="panel-heading">';
 				code += '   <h4 class="panel-title">';
-				code += '     <a data-toggle="collapse" data-parent="#accordion" href="#collapse' + v.seq + '">' + v.subject + '</a>';
+				code += '     <a class = "action" name = "list" idx = "'+ v.seq +'" data-toggle="collapse" data-parent="#accordion" href="#collapse' + v.seq + '">' + v.subject + '</a>';
 				code += '   </h4>';
 				code += ' </div>';
 				code += ' <div id="collapse'+v.seq+'" class="panel-collapse collapse">';
@@ -120,6 +163,7 @@ var readServer = function(){
 				code += '<button style = "height : 45px; vertical-align : top; float : right; " type = "button" idx = "'+v.seq+'" name = "reply" class = "action">등록</button> ';
 				code += '   	</p> ';
 				code += '   </div>';
+				code += ' </div>';
 				code += ' </div>';
 			})
 			code += '</div>';

@@ -38,7 +38,7 @@
 				deleteServer(bidx);
 			}else if(bname == "modify"){
 				
-			}else if (bname == "reply"){
+			}else if (bname == "reply"){	//댓글 등록 버튼 클릭
 				//[] -> 배열      {} --> 객체(동적으로 필드나 메서드를 추가할 수 있다.)
 				
 				//댓글 등록, 입력한 내용을 가져온다. (자식찾기 content, find, childred)->parent.find('.area').val
@@ -49,14 +49,60 @@
 				reply.bonum = bidx;
 				
 				//this는 누른 등록버튼 this를 기준으로 하기 위하여 this를 넘겨줌 
-				replySaveServer();
+				//replysaveserver와 replylistserver는 비동기이므로 replysaveserver가 실행되기 전에 replylistserver가 실행될 수 있어, replysaveserver가 동기처리해주어야 한다. 
+				// 동기 처리 -> async : false,
+				replySaveServer();				//비동기처리를 동기처리로 변환
 				ReplyListServer(bidx, this);
+			//제목을 클릭하면	
+			}else if(bname == "list"){
+				ReplyListServer(bidx, this);
+			}else if(bname =="r_delete"){
+				replyDeleteServer(bidx,this);
+			}else if (bname =="r_modify") {
+				
+				if($('#modifyForm').css('display') != "none") {
+					//댓글수정 클릭할때 이미 다른곳에서 댓글 수정을 완료하지 않은 상태로 modifyForm이 현재 열려 있는 상태를 닽으려고 한다. 
+				replyReset();
+				}
+				rnum = bidx;
+				modifycont = $(this).parents('.rep').find('.cont').html().replace(/<br>/g, "\n");
+				$('#modifyForm>#test').val(modifycont);
+				$(this).parents('.rep').find('.cont').empty().append($('#modifyForm'));
+				$('#modifyForm').show();
+				//replyModifyServer(bidx, this);
 				
 			}
 		})
 		
+		function replyReset(){
+			
+		 spanTag = $('#modifyForm').parent();
+		 $('body').append($('#modifyForm'));
+		 
+		 $('#modifyForm').hide();
+		 
+		 spanTag.html(modifycont.replace(/\n/g, "<br>"));
+		}
+		
 		$('#w_submit').on('click', function(){
 			writeServer();
+		})
+		
+		$('#btnreset').click(function(){
+			replyReset();
+		})
+		
+		$('#btnok').click(function(){
+			modifycont = $('#modifyForm>#test').val();
+			spanTag = $('#modifyForm').parent();
+			reply.renum = rnum;
+			reply.cont = modifycont;
+			replyUpdateServer();
+			
+			$('body').append($('modifyForm'));
+			$('#modifyForm').hide();
+			
+			spanTag.html(modifycont.replace(/\n/g,"<br>"));
 		})
 
 	})
@@ -64,9 +110,13 @@
 </script>
 </head>
 <body>
-<div id = "ss"></div>
- <h2>Accordion게시판 </h2>
- <br>
+<div id = "modifyForm" style = "display:none;">
+	<textarea id = "test" rows="5" cols="50"></textarea>
+	<input type = "button" value = "확인" id = "btnok">
+	<input type = "button" value = "취소" id = "btnreset">
+</div>
+ <h2>  ༼๑⁰⊖⁰๑༽❤  게시판❤ (^◔ᴥ◔^) </h2>
+ 
  <button id = "top" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-"></span>글쓰기</button>
  <br><br>
  

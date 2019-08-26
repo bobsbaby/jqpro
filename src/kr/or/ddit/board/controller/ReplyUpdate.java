@@ -1,7 +1,8 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,42 +10,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
-
 import kr.or.ddit.board.service.BoardServiceImpl;
 import kr.or.ddit.board.service.IBoardService;
 import kr.or.ddit.board.vo.ReplyVo;
 
 /**
- * Servlet implementation class ReplySave
+ * Servlet implementation class ReplyUpdate
  */
-@WebServlet("/ReplySave")
-public class ReplySave extends HttpServlet {
+@WebServlet("/ReplyUpdate")
+public class ReplyUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReplySave() {
+   
+    public ReplyUpdate() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		int rnum = Integer.parseInt(request.getParameter("renum"));
+		String cont = request.getParameter("cont");
 		
-		ReplyVo vo = new ReplyVo();
-		try {
-			BeanUtils.populate(vo, request.getParameterMap());
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cont", cont);
+		map.put("renum", rnum);
 		
 		IBoardService service = BoardServiceImpl.getInstance();
-		int renum =  service.insertReply(vo);
-		request.setAttribute("renum", renum);
-		request.getRequestDispatcher("accordion/replysave.jsp").forward(request, response);
+		int res = service.modifyReply(map);
+		request.setAttribute("res", res);
+		
+		request.getRequestDispatcher("/accordion/update.jsp").forward(request, response);
 	}
+
 }

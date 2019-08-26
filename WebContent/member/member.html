@@ -158,13 +158,14 @@ label.control-l {
 			//form에 선택한 행의 값을(우편번호와 주소)출력
 			$('#zipBtn').val(zipcode);
 			$('#add1').val(add1);
-			
 			$('#myModal').modal('hide');
+			
 		})
 		//모달창 닫기 이벤트 - 모닫창 닫을때 모달창의 내용을 지우기
 		$('#myModal').on('hide.bs.modal', function(){
 			$('#result1').empty();
 			$('#dong').val("");
+			$('.modal-backdrop').remove();
 		})
 		
 		//제출버튼 클릭 - 전송, 저장 
@@ -209,7 +210,9 @@ label.control-l {
 			})
 			
 		})
-		
+		$('#zipBtn').on('click', function(){
+			$('#myModal').modal('show');
+		})
 	})
 	
 </script>
@@ -264,11 +267,10 @@ label.control-l {
 				<div class="form-g">
 					<label class="control-l" for="zip">우편번호</label> <input type="text"
 						class="form-c addr" id="zipBtn" placeholder="" name="mem_zip">
-					<button type="button" data-toggle="modal" data-target="#myModal"
-						class="btn" id="myBtn">번호검색</button>
-					<br> <label class="control-l" for="add1">주소:</label> <input
-						type="text" class="form-c addr" id="add1" placeholder=""
-						name="mem_add1"><br> <label class="control-l"
+					<button type="button" class="btn" id="myBtn">번호검색</button>
+					<br> 
+					<label class="control-l" for="add1">주소:</label> 
+					<input type="text" class="form-c addr" id="add1" placeholder="" name="mem_add1"><br> <label class="control-l"
 						for="add2">상세주소:</label> <input type="text" class="form-c addr"
 						id="add2" placeholder="" name="mem_add2">
 				</div>

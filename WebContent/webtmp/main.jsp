@@ -87,9 +87,9 @@
   			$('.text-left h1').text(subtxt);
   			
   			if(subtxt == "회원가입"){
-  				$('.text-left #result').load("/jqpro/member/member.html");
+  				$('.text-left #result1').load("/jqpro/member/member.html");
   			}else if(subtxt =="Login"){
-  				$('.text-left #result').load("/jqpro/0812/lprod_prod.html");
+  				$('.text-left #result1').load("/jqpro/0812/lprod_prod.html");
   			}else if(stbtxt == "자유게시판"){
   				
   			}

@@ -15,7 +15,7 @@
       <h1>Welcome</h1>
       
       <hr>
-      <div id = "result"></div>
+      <div id = "result1"></div>
     </div>
 
   </div>

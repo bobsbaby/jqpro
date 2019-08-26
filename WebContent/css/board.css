@@ -3,8 +3,13 @@
 .rep {
 	
 	height : auto;
-	background: fuchsia;
-	border: 1px solid lime;
+	background: #ffe8f3;
+	border: 1px solid #fdffea;
 	margin-top: 2px;
 	
 }
+
+ body {
+	background-image: url(../images/jang1.jpg);
+	background-repeat : repeat;
+ }

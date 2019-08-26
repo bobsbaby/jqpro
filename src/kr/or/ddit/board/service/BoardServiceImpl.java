@@ -2,6 +2,7 @@ package kr.or.ddit.board.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.board.dao.BoardDaoImpl;
 import kr.or.ddit.board.dao.IBoardDao;
@@ -30,7 +31,6 @@ public class BoardServiceImpl implements IBoardService {
 		try {
 			list = dao.selectAll();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -43,7 +43,6 @@ public class BoardServiceImpl implements IBoardService {
 		try {
 			seq = dao.insertBoard(vo);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return seq;
@@ -55,7 +54,6 @@ public class BoardServiceImpl implements IBoardService {
 		try {
 			res = dao.deleteBoard(seq);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
@@ -67,7 +65,6 @@ public class BoardServiceImpl implements IBoardService {
 		try {
 			seq = dao.insertReply(vo);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return seq;
@@ -79,10 +76,32 @@ public class BoardServiceImpl implements IBoardService {
 		try {
 			list = dao.listReply(seq);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public int deleteReply(int renum) {
+		int seq = 0;
+		try {
+			seq = dao.deleteReply(renum);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return seq;
+	}
+
+	@Override
+	public int modifyReply(Map<String, Object> map) {
+		int seq = 0;
+		
+		try {
+			seq = dao.modifyReply(map);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return seq;
 	}
 
 }
